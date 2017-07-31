@@ -1,3 +1,56 @@
 <resources>
-    <string name="app_name">Rokad</string>
+    <string name="app_name">LIVFRIEGHT</string>
+    <string name="activity_login_hint_email">Email</string>
+    <string name="activity_login_hint_mobile">Mobile/मोबाइल</string>
+    <string name="activity_password">Password/पासवर्ड</string>
+    <string name="activity_login_button_submit">SUBMIT/सबमिट करे</string>
+    
+    <string name="activity_main_truck_entry">Truck Entry</string>
+    <string name="activity_main_receiving">Receiving</string>
+    <string name="activity_main_rokad">Rokad</string>
+    
+    <string name="activity_lr_no">LR NO.</string>
+    <string name="activity_weight">Weight</string>
+    <string name="activity_date">Date</string>
+    <string name="activity_truck_no">Truck No.</string>
+    <string name="activity_destination">Destination</string>
+    <string name="activity_order_no">Order No.</string>
+    <string name="activity_invoice_no">Invoice No.</string>
+    <string name="activity_party">Party Name</string>
+    <string name="activity_cash_advance">Cash Advance</string>
+    <string name="activity_diesel_advance">Diesel Advance</string>
+    <string name="activity_bill_rate">Bill Rate</string>
+
+    <string name="activity_office">Office</string>
+    <string name="activity_total_bhada">Total Bhada</string>
+    <string name="activity_total_advance">Total Advance</string>
+    <string name="activity_shortage">Shortage</string>
+    <string name="activity_commission">Commission</string>
+
+
+    <string name="please_enter_email">Please enter Email</string>
+    <string name="please_enter_mobile">Please enter Mobile</string>
+    <string name="please_enter_valid_mobile">Please enter valid Mobile</string>
+    <string name="please_enter_password">Please enter Password</string>
+
+    <string name="progress_dialog_text_loading">Loading&#8230;</string>
+    <string name="progress_dialog_text_generating_survey">Generating Survey&#8230;</string>
+    <string name="progress_dialog_text_logging_out">Logging Out&#8230;</string>
+    <string name="progress_dialog_text_logging_in">Logging In&#8230;</string>
+    <string name="progress_dialog_text_please_wait">Please wait&#8230;</string>
+    <string name="progress_dialog_text_sending_request">Sending Request&#8230;</string>
+    <string name="progress_dialog_text_submitting_responses">Submitting Responses&#8230;</string>
+    <string name="progress_dialog_text_initializing">Initializing Application&#8230;</string>
+
+    <string name="snackbar_text_no_internet_connection_available">No Internet Connection available
+    </string>
+    <string name="snackbar_text_error_occurred">Error Occurred</string>
+    <string name="snackbar_text_exception_occurred">Exception Occurred</string>
+    <string name="snackbar_text_invalid_access_pin">Invalid Access PIN</string>
+
+    <string name="snackbar_action_go_to_settings">GO TO SETTINGS</string>
+    <string name="snackbar_action_dismiss">DISMISS</string>
+    <string name="snackbar_action_retry">RETRY</string>
+
+    <string name="snackbar_action_undo">UNDO</string>
 </resources>
