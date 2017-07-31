@@ -1,5 +1,4 @@
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clMain"
@@ -15,9 +14,10 @@
         android:animateLayoutChanges="true"
         android:theme="@style/AppTheme.AppBarOverlay"
         android:visibility="visible">
-        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+
+        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/toolbar"
             style="@style/Widget.MyApp.ActionBar"
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:animateLayoutChanges="true"
@@ -32,14 +32,17 @@
             app:contentInsetRight="0dp"
             app:contentInsetStart="0dp"
             app:layout_collapseMode="pin">
+
             <RelativeLayout
                 android:id="@+id/toolbar_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
+
                 <RelativeLayout
                     android:id="@+id/rlBack"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent">
+
                     <ImageView
                         android:id="@+id/ivBack"
                         android:layout_width="wrap_content"
@@ -48,7 +51,8 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_back"
-                        android:visibility="visible"/>
+                        android:visibility="visible" />
+
                     <TextView
                         android:id="@+id/tvBack"
                         android:layout_width="wrap_content"
@@ -58,20 +62,17 @@
                         android:gravity="center_vertical"
                         android:text="Home"
                         android:textColor="@color/text_color_white"
-                        android:textSize="@dimen/text_size_small"/>
-
+                        android:textSize="@dimen/text_size_small" />
 
 
                     <TextView
                         android:id="@+id/tvTitle"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_toEndOf="@+id/ivBack"
-                        android:layout_toRightOf="@+id/ivBack"
                         android:gravity="center"
                         android:text="@string/activity_main_receiving"
                         android:textColor="@color/text_color_white"
-                        android:textSize="@dimen/text_size_medium"/>
+                        android:textSize="@dimen/text_size_medium" />
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -88,12 +89,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
-
 
 
                 <LinearLayout
@@ -109,7 +108,7 @@
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
                         android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/activity_margin_extra_small"
+                        android:textColor="@color/primary"
                         android:text="@string/activity_office"
                         android:textSize="@dimen/text_size_extra_small" />
 
@@ -120,9 +119,8 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large"  />
+                        android:textSize="@dimen/text_size_medium"
+                        android:background="@drawable/edittext_underline"/>
 
 
                     <TextView
@@ -133,10 +131,9 @@
                         android:layout_marginRight="@dimen/activity_margin"
                         android:layout_marginTop="@dimen/activity_margin_small"
                         android:inputType="number"
-                        android:padding="@dimen/activity_margin_extra_small"
                         android:text="@string/activity_lr_no"
-                        android:textSize="@dimen/text_size_extra_small" />
-
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/primary"/>
 
 
                     <EditText
@@ -146,10 +143,8 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large"  />
-
+                        android:textSize="@dimen/text_size_medium"
+                        android:background="@drawable/edittext_underline"/>
 
 
                     <TextView
@@ -159,9 +154,9 @@
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
                         android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/activity_margin_extra_small"
                         android:text="@string/activity_total_bhada"
-                        android:textSize="@dimen/text_size_extra_small" />
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/primary"/>
 
                     <EditText
                         android:id="@+id/etTotalBhada"
@@ -170,9 +165,8 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large"  />
+                        android:background="@drawable/edittext_underline"
+                        android:textSize="@dimen/text_size_medium" />
 
                     <TextView
                         android:id="@+id/tvTotalAdvance"
@@ -181,9 +175,9 @@
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
                         android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/activity_margin_extra_small"
                         android:text="@string/activity_total_advance"
-                        android:textSize="@dimen/text_size_extra_small" />
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/primary"/>
 
                     <EditText
                         android:id="@+id/etTotalAdvance"
@@ -192,9 +186,8 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large"  />
+                        android:textSize="@dimen/text_size_medium"
+                        android:background="@drawable/edittext_underline"/>
 
                     <TextView
                         android:id="@+id/tvShortage"
@@ -203,9 +196,9 @@
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
                         android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/activity_margin_extra_small"
                         android:text="@string/activity_shortage"
-                        android:textSize="@dimen/text_size_extra_small" />
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/primary"/>
 
                     <EditText
                         android:id="@+id/etShortage"
@@ -214,9 +207,8 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large"  />
+                        android:textSize="@dimen/text_size_medium"
+                        android:background="@drawable/edittext_underline"/>
 
                     <TextView
                         android:id="@+id/tvCommission"
@@ -225,9 +217,9 @@
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
                         android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/activity_margin_extra_small"
                         android:text="@string/activity_commission"
-                        android:textSize="@dimen/text_size_extra_small" />
+                        android:textSize="@dimen/text_size_extra_small"
+                        android:textColor="@color/primary"/>
 
                     <EditText
                         android:id="@+id/etCommission"
@@ -236,9 +228,8 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:padding="@dimen/edittext_padding"
-                        android:textSize="@dimen/text_size_large"  />
+                      android:background="@drawable/edittext_underline"
+                        android:textSize="@dimen/text_size_medium" />
 
 
                 </LinearLayout>
@@ -258,7 +249,7 @@
                     android:padding="@dimen/activity_button"
                     android:text="@string/activity_login_button_submit"
                     android:textColor="@color/text_color_white"
-                    android:textSize="@dimen/text_size_extra_large" />
+                    android:textSize="@dimen/text_size_medium" />
 
 
             </LinearLayout>

@@ -56,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
     UserDetailsPref userDetailsPref;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
@@ -64,25 +64,33 @@ public class LoginActivity extends AppCompatActivity {
         initListener();
     }
 
+    private void initView() {
+        etMobile = (EditText) findViewById(R.id.etMobile);
+        etPassword = (EditText) findViewById(R.id.etPassword);
+        clMain = (CoordinatorLayout) findViewById(R.id.clMain);
+        tvSubmit = (TextView) findViewById(R.id.tvSubmit);
+    }
+
+
     private void initData() {
         userDetailsPref = UserDetailsPref.getInstance();
         progressDialog = new ProgressDialog(this);
         PackageInfo pInfo = null;
         try {
-            pInfo = getPackageManager ().getPackageInfo (getPackageName (), 0);
+            pInfo = getPackageManager().getPackageInfo(getPackageName(), 0);
         } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
-        jsonDeviceDetails = new JSONObject ();
+        jsonDeviceDetails = new JSONObject();
         try {
-            jsonDeviceDetails.put ("device_id", Settings.Secure.getString (LoginActivity.this.getContentResolver (), Settings.Secure.ANDROID_ID));
-            jsonDeviceDetails.put ("device_api_level", Build.VERSION.SDK_INT);
-            jsonDeviceDetails.put ("device_os_version", Build.VERSION.RELEASE);
-            jsonDeviceDetails.put ("device_manufacturer", Build.MANUFACTURER);
-            jsonDeviceDetails.put ("device_model", Build.MODEL);
-            jsonDeviceDetails.put ("app_version", pInfo.versionCode);
+            jsonDeviceDetails.put("device_id", Settings.Secure.getString(LoginActivity.this.getContentResolver(), Settings.Secure.ANDROID_ID));
+            jsonDeviceDetails.put("device_api_level", Build.VERSION.SDK_INT);
+            jsonDeviceDetails.put("device_os_version", Build.VERSION.RELEASE);
+            jsonDeviceDetails.put("device_manufacturer", Build.MANUFACTURER);
+            jsonDeviceDetails.put("device_model", Build.MODEL);
+            jsonDeviceDetails.put("app_version", pInfo.versionCode);
         } catch (Exception e) {
-            e.printStackTrace ();
+            e.printStackTrace();
         }
 
     }
@@ -100,36 +108,38 @@ public class LoginActivity extends AppCompatActivity {
                 SpannableString s4 = new SpannableString(getResources().getString(R.string.please_enter_password));
                 s4.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s4.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
-                    if(etMobile.getText().toString().trim().length() == 0){
-                        etMobile.setError(s);
-                    }else if(etPassword.getText().toString().trim().length() == 0){
-                        etPassword.setError(s4);
-                    }else{
-                        try{
-                            switch (Utils.isValidMobile(etMobile.getText().toString())){
-                                case 1:
-                                    etMobile.setError(s2);
-                                    break;
-                                case 2:
-                                    etMobile.setError(s2);
-                                    break;
-                                case 3:
-                                    LoginFromServer(etMobile.getText().toString(), etPassword.getText().toString(), jsonDeviceDetails.toString ());
-                                    // getOTP(etMobile.getText().toString());
-                              /*  Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                if (etMobile.getText().toString().trim().length() == 0) {
+                    etMobile.setError(s);
+                } else if (etPassword.getText().toString().trim().length() == 0) {
+                    etPassword.setError(s4);
+                } else {
+                    try {
+                        switch (Utils.isValidMobile(etMobile.getText().toString())) {
+                            case 1:
+                                etMobile.setError(s2);
+                                break;
+                            case 2:
+                                etMobile.setError(s2);
+                                break;
+                            case 3:
+                                //  LoginFromServer(etMobile.getText().toString(), etPassword.getText().toString(), jsonDeviceDetails.toString ());
+                                // getOTP(etMobile.getText().toString());
+                                userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                 startActivity(intent);
-                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);*/
-                                    break;
-                                case 4:
-                                    etMobile.setError(s3);
-                                    break;
-                            }
-                        }catch (NumberFormatException e){
-                            e.printStackTrace();
-                            etMobile.setError(s3);
+                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                                break;
+                            case 4:
+                                etMobile.setError(s3);
+                                break;
                         }
+                    } catch (NumberFormatException e) {
+                        e.printStackTrace();
+                        etMobile.setError(s3);
                     }
                 }
+            }
         });
 
         etPassword.addTextChangedListener(new TextWatcher() {
@@ -167,12 +177,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    private void initView() {
-        etMobile = (EditText)findViewById(R.id.etMobile);
-        etPassword = (EditText)findViewById(R.id.etPassword);
-        clMain = (CoordinatorLayout)findViewById(R.id.clMain);
-        tvSubmit = (TextView)findViewById(R.id.tvSubmit);
-    }
 
     private void LoginFromServer(final String mobile, final String password, final String device_details) {
         if (NetworkConnection.isNetworkAvailable(LoginActivity.this)) {
@@ -190,11 +194,11 @@ public class LoginActivity extends AppCompatActivity {
                                     boolean error = jsonObj.getBoolean(AppConfigTags.ERROR);
                                     String message = jsonObj.getString(AppConfigTags.MESSAGE);
                                     if (!error) {
-                                        userDetailsPref.putStringPref(LoginActivity.this,UserDetailsPref.USER_NAME,jsonObj.getString(AppConfigTags.USER_NAME));
-                                        userDetailsPref.putStringPref(LoginActivity.this,UserDetailsPref.USER_MOBILE,jsonObj.getString(AppConfigTags.USER_MOBILE));
-                                        userDetailsPref.putStringPref(LoginActivity.this,UserDetailsPref.USER_EMAIL,jsonObj.getString(AppConfigTags.USER_EMAIL));
-                                        userDetailsPref.putStringPref(LoginActivity.this,UserDetailsPref.USER_TYPE,jsonObj.getString(AppConfigTags.USER_TYPE));
-                                        userDetailsPref.putStringPref(LoginActivity.this,UserDetailsPref.USER_LOGIN_KEY,jsonObj.getString("user_login_key"));
+                                        userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_NAME, jsonObj.getString(AppConfigTags.USER_NAME));
+                                        userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_MOBILE, jsonObj.getString(AppConfigTags.USER_MOBILE));
+                                        userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_EMAIL, jsonObj.getString(AppConfigTags.USER_EMAIL));
+                                        userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_TYPE, jsonObj.getString(AppConfigTags.USER_TYPE));
+                                        userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, jsonObj.getString("user_login_key"));
                                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                         startActivity(intent);

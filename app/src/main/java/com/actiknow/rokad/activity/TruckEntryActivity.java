@@ -18,6 +18,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.TimePicker;
 
@@ -66,6 +67,7 @@ public class TruckEntryActivity extends AppCompatActivity implements com.borax12
     EditText etNumberPlate2;
     EditText etNumberPlate3;
     EditText etNumberPlate4;
+    RelativeLayout rlBack;
 
     private int mYear, mMonth, mDay, mHour, mMinute;
     String date = "", time = "", address2 = "";
@@ -96,6 +98,7 @@ public class TruckEntryActivity extends AppCompatActivity implements com.borax12
         etNumberPlate4 = (EditText) findViewById(R.id.etNumberPlate4);
         tvSubmit = (TextView) findViewById(R.id.tvSubmit);
         clMain = (CoordinatorLayout) findViewById(R.id.clMain);
+        rlBack=(RelativeLayout)findViewById(R.id.rlBack);
 
     }
 
@@ -107,6 +110,14 @@ public class TruckEntryActivity extends AppCompatActivity implements com.borax12
 
 
     private void initListener() {
+        rlBack.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                finish ();
+                overridePendingTransition (R.anim.slide_in_left, R.anim.slide_out_right);
+            }
+        });
+
         etDate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

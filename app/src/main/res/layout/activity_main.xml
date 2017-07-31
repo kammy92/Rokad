@@ -1,94 +1,167 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:plainpie="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clMain"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@color/app_background_color">
-
-
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        TagsEditText:layout_behavior="@string/appbar_scrolling_view_behavior">
+        android:animateLayoutChanges="true">
 
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            >
-
-
-            <TextView
-                android:id="@+id/tvTruckEntry"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_marginRight="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/activity_margin_small"
-                android:background="@drawable/button_bg"
-                android:elevation="@dimen/button_elevation"
-                android:gravity="center"
-                android:padding="@dimen/activity_margin"
-                android:text="@string/activity_main_truck_entry"
-                android:textColor="@color/text_color_white"
-                android:textSize="@dimen/text_size_extra_large" />
-
-
-
-            <TextView
-                android:id="@+id/tvReceiving"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_marginRight="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/activity_margin_small"
-                android:background="@drawable/button_bg"
-                android:elevation="@dimen/button_elevation"
-                android:gravity="center"
-                android:padding="@dimen/activity_margin"
-                android:text="@string/activity_main_receiving"
-                android:textColor="@color/text_color_white"
-                android:textSize="@dimen/text_size_extra_large" />
-
-
-            <TextView
-                android:id="@+id/tvRokad"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/activity_margin_small"
-                android:layout_marginLeft="@dimen/activity_margin"
-                android:layout_marginRight="@dimen/activity_margin"
-                android:layout_marginTop="@dimen/activity_margin_small"
-                android:background="@drawable/button_bg"
-                android:elevation="@dimen/button_elevation"
-                android:gravity="center"
-                android:padding="@dimen/activity_margin"
-                android:text="@string/activity_main_rokad"
-                android:textColor="@color/text_color_white"
-                android:textSize="@dimen/text_size_extra_large" />
-
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/tvLogout"
+        <android.support.design.widget.AppBarLayout
+            android:id="@+id/appBar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Logout"
-            android:layout_alignParentBottom="true"
-            android:textColor="@color/text_color_black"
-            android:gravity="center"
-            android:layout_margin="@dimen/activity_margin_extra_large"
-            android:padding="@dimen/activity_margin"
-            />
+            android:animateLayoutChanges="true"
+            android:theme="@style/AppTheme.AppBarOverlay"
+            android:visibility="visible">
 
+            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/toolbar"
+                style="@style/Widget.MyApp.ActionBar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:animateLayoutChanges="true"
+                android:background="@android:color/transparent"
+                android:contentInsetEnd="0dp"
+                android:contentInsetLeft="0dp"
+                android:contentInsetRight="0dp"
+                android:contentInsetStart="0dp"
+                android:visibility="visible"
+                app:contentInsetEnd="0dp"
+                app:contentInsetLeft="0dp"
+                app:contentInsetRight="0dp"
+                app:contentInsetStart="0dp"
+                app:layout_collapseMode="pin">
+
+                <RelativeLayout
+                    android:id="@+id/toolbar_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <RelativeLayout
+                        android:id="@+id/rlBack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/ivNavigation"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentLeft="true"
+                            android:layout_alignParentStart="true"
+                            android:layout_centerVertical="true"
+                            android:padding="@dimen/activity_margin"
+                            android:src="@drawable/ic_navigation"
+                            android:visibility="visible" />
+                    </RelativeLayout>
+
+                    <ImageView
+                        android:layout_width="120dp"
+                        android:layout_height="?attr/actionBarSize"
+                        android:layout_centerInParent="true"
+                        android:padding="@dimen/activity_margin_extra_small"
+                        android:visibility="gone" />
+
+                    <TextView
+                        android:id="@+id/tvTitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:gravity="center"
+                        android:text="LivFreight"
+                        android:textColor="@color/text_color_white"
+                        android:textSize="@dimen/text_size_title"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+
+                </RelativeLayout>
+            </android.support.v7.widget.Toolbar>
+        </android.support.design.widget.AppBarLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/appBar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/tvTruckEntry"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_margin_small"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:background="@drawable/button_bg"
+                    android:elevation="@dimen/button_elevation"
+                    android:gravity="center"
+                    android:padding="@dimen/activity_margin"
+                    android:text="@string/activity_main_truck_entry"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_extra_large" />
+
+
+                <TextView
+                    android:id="@+id/tvReceiving"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_margin_small"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:background="@drawable/button_bg"
+                    android:elevation="@dimen/button_elevation"
+                    android:gravity="center"
+                    android:padding="@dimen/activity_margin"
+                    android:text="@string/activity_main_receiving"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_extra_large" />
+
+
+                <TextView
+                    android:id="@+id/tvRokad"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_margin_small"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:background="@drawable/button_bg"
+                    android:elevation="@dimen/button_elevation"
+                    android:gravity="center"
+                    android:padding="@dimen/activity_margin"
+                    android:text="@string/activity_main_rokad"
+                    android:textColor="@color/text_color_white"
+                    android:textSize="@dimen/text_size_extra_large" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvLogout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_margin="@dimen/activity_margin_extra_large"
+                android:gravity="center"
+                android:padding="@dimen/activity_margin"
+                android:text="Logout"
+                android:textColor="@color/primary_dark"
+                android:textSize="@dimen/text_size_large"
+                android:textStyle="bold"/>
+
+        </RelativeLayout>
     </RelativeLayout>
+
 </android.support.design.widget.CoordinatorLayout>
