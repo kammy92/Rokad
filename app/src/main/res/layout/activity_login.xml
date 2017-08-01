@@ -1,110 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!--
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:TagsEditText="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/app_background_color">
+-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/ivLogo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/logo_height"
+        android:layout_margin="@dimen/activity_margin"
+        android:src="@mipmap/ic_launcher"/>
 
-    <RelativeLayout
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        >
 
-            <LinearLayout
-                xmlns:android="http://schemas.android.com/apk/res/android"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <TextView
+                android:id="@+id/tvMobile"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <ImageView
-                    android:id="@+id/ivLogo"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/logo_height"
-                    android:layout_margin="@dimen/activity_margin"
-                    android:src="@mipmap/ic_launcher" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin_small"
+                android:inputType="number"
+                android:text="@string/activity_login_hint_mobile"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/text_size_extra_small"/>
 
 
-                    <TextView
-                        android:id="@+id/tvMobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:text="@string/activity_login_hint_mobile"
-                        android:inputType="number"
-                        android:textColor="@color/primary"
-                        android:textSize="@dimen/text_size_extra_small" />
+            <EditText
+                android:id="@+id/etMobile"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_margin_small"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:background="@drawable/edittext_underline"
+                android:inputType="textEmailAddress"
+                android:maxLength="10"
+                android:textSize="@dimen/text_size_medium"/>
+
+            <TextView
+                android:id="@+id/tvPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:layout_marginTop="@dimen/activity_margin_small"
+                android:text="@string/activity_password"
+                android:textColor="@color/primary"
+                android:textSize="@dimen/text_size_extra_small"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_margin_small"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+
+                android:background="@drawable/edittext_underline"
+                android:inputType="textPassword"
+                android:textSize="@dimen/text_size_medium"/>
+
+        </LinearLayout>
 
 
-
-                    <EditText
-                        android:id="@+id/etMobile"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_margin_small"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:inputType="textEmailAddress"
-                        android:textSize="@dimen/text_size_medium"
-                        android:maxLength="10"
-                        android:background="@drawable/edittext_underline"/>
-
-                    <TextView
-                        android:id="@+id/tvPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-                        android:layout_marginTop="@dimen/activity_margin_small"
-                        android:text="@string/activity_password"
-                        android:textSize="@dimen/text_size_extra_small"
-                        android:textColor="@color/primary"/>
-
-                    <EditText
-                        android:id="@+id/etPassword"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_margin_small"
-                        android:layout_marginLeft="@dimen/activity_margin"
-                        android:layout_marginRight="@dimen/activity_margin"
-
-                        android:inputType="textPassword"
-                        android:textSize="@dimen/text_size_medium"
-                        android:background="@drawable/edittext_underline"/>
-
-                </LinearLayout>
+        <TextView
+            android:id="@+id/tvSubmit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:background="@drawable/button_bg"
+            android:elevation="@dimen/button_elevation"
+            android:gravity="center"
+            android:padding="@dimen/activity_button"
+            android:text="@string/activity_login_button_submit"
+            android:textColor="@color/text_color_white"
+            android:textSize="@dimen/text_size_large"/>
 
 
-                <TextView
-                    android:id="@+id/tvSubmit"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_margin_small"
-                    android:layout_marginLeft="@dimen/activity_margin"
-                    android:layout_marginRight="@dimen/activity_margin"
-                    android:layout_marginTop="@dimen/activity_margin_small"
-                    android:background="@drawable/button_bg"
-                    android:elevation="@dimen/button_elevation"
-                    android:gravity="center"
-                    android:padding="@dimen/activity_button"
-                    android:text="@string/activity_login_button_submit"
-                    android:textColor="@color/text_color_white"
-                    android:textSize="@dimen/text_size_large" />
+    </LinearLayout>
 
 
-            </LinearLayout>
-
-
-    </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
+    <!--
+    </android.support.design.widget.CoordinatorLayout>-->
