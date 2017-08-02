@@ -5,10 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.actiknow.rokad.R;
 import com.actiknow.rokad.utils.SetTypeFace;
 import com.actiknow.rokad.utils.UserDetailsPref;
+import com.actiknow.rokad.utils.Utils;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
@@ -36,13 +37,11 @@ import com.mikepenz.materialdrawer.util.AbstractDrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerImageLoader;
 import com.mikepenz.materialdrawer.util.DrawerUIUtils;
 
-import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
     TextView tvTruckEntry;
     TextView tvReceiving;
     TextView tvRokad;
-    TextView tvLogout;
     private AccountHeader headerResult = null;
     private Drawer result = null;
     ImageView ivNavigation;
@@ -77,8 +76,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-
         tvTruckEntry.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,24 +100,17 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-        tvLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                showLogOutDialog();
-            }
-        });
     }
 
     private void initData() {
         userDetailsPref = UserDetailsPref.getInstance();
+        Utils.setTypefaceToAllViews (this, tvTruckEntry);
     }
 
     private void initView() {
         tvTruckEntry = (TextView) findViewById(R.id.tvTruckEntry);
         tvReceiving = (TextView) findViewById(R.id.tvReceiving);
         tvRokad = (TextView) findViewById(R.id.tvRokad);
-        tvLogout = (TextView) findViewById(R.id.tvLogout);
         ivNavigation = (ImageView) findViewById(R.id.ivNavigation);
     }
 
@@ -134,7 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_MOBILE, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_MOBILE, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_NAME, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_EMAIL, "");
                         userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -262,12 +254,11 @@ public class MainActivity extends AppCompatActivity {
                 .withActivity (this)
                 .withCompactStyle (false)
                 .withTypeface (SetTypeFace.getTypeface (MainActivity.this))
-                .withTypeface (SetTypeFace.getTypeface (this))
                 .withPaddingBelowHeader (false)
                 .withSelectionListEnabled (false)
                 .withSelectionListEnabledForSingleProfile (false)
                 .withProfileImagesVisible (false)
-                .withOnlyMainProfileImageVisible (true)
+                .withOnlyMainProfileImageVisible (false)
                 .withDividerBelowHeader (true)
                 .withHeaderBackground (R.color.primary)
                 .withSavedInstance (savedInstanceState)
@@ -281,9 +272,8 @@ public class MainActivity extends AppCompatActivity {
                 })
                 .build ();
         headerResult.addProfiles (new ProfileDrawerItem()
-                .withIcon (R.drawable.doctor)
-                .withName ("Rahul jain")
-                .withEmail ("Rahul.jain@actiknowbi.com"));
+                .withName (userDetailsPref.getStringPref (this, UserDetailsPref.USER_NAME))
+                .withEmail (userDetailsPref.getStringPref (this, UserDetailsPref.USER_EMAIL)));
 
       /*   .withIcon (buyerDetailsPref.getStringPref (MainActivity.this, BuyerDetailsPref.BUYER_IMAGE))
                 .withName (buyerDetailsPref.getStringPref (MainActivity.this, BuyerDetailsPref.BUYER_NAME))
@@ -297,28 +287,16 @@ public class MainActivity extends AppCompatActivity {
 //                .withItemAnimator (new AlphaCrossFadeAnimator ())
                 .addDrawerItems (
                         new PrimaryDrawerItem().withName ("My Home").withIcon (FontAwesome.Icon.faw_home).withIdentifier (1).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Search job").withIcon (FontAwesome.Icon.faw_heart).withIdentifier (2).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Recommended Job").withIcon (FontAwesome.Icon.faw_handshake_o).withIdentifier (3).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Bookmarked Job").withIcon (FontAwesome.Icon.faw_info).withIdentifier (4).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Feedback").withIcon (FontAwesome.Icon.faw_comments).withIdentifier (5).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Promote this app").withIcon (FontAwesome.Icon.faw_phone).withIdentifier (6).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
-                       /* new PrimaryDrawerItem ().withName ("FAQ").withIcon (FontAwesome.Icon.faw_question).withIdentifier (7).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("My Profile").withIcon (FontAwesome.Icon.faw_user).withIdentifier (8).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Change Password").withIcon (FontAwesome.Icon.faw_key).withIdentifier (9).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this)),
-                        new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (10).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))*/
+                        new PrimaryDrawerItem ().withName ("Sign Out").withIcon (FontAwesome.Icon.faw_sign_out).withIdentifier (2).withSelectable (false).withTypeface (SetTypeFace.getTypeface (MainActivity.this))
                 )
                 .withSavedInstance (savedInstanceState)
                 .withOnDrawerItemClickListener (new Drawer.OnDrawerItemClickListener () {
                     @Override
                     public boolean onItemClick (View view, int position, IDrawerItem drawerItem) {
                         switch ((int) drawerItem.getIdentifier ()) {
-                          /*  case 2:
-                                Intent intent2 = new Intent (MainActivity.this, SearchJobActivity.class);
-                                startActivity (intent2);
-                                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
-                                break;
-                            case 3:
+                            case 2:
+                                showLogOutDialog ();                                break;
+                          /*  case 3:
                                 Intent intent3 = new Intent (MainActivity.this, RecommendedJobActivity.class);
                                 startActivity (intent3);
                                 overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);

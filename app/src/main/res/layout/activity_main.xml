@@ -19,7 +19,8 @@
             android:theme="@style/AppTheme.AppBarOverlay"
             android:visibility="visible">
 
-            <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+            <android.support.v7.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar"
                 style="@style/Widget.MyApp.ActionBar"
                 android:layout_width="match_parent"
@@ -147,20 +148,6 @@
                     android:textSize="@dimen/text_size_extra_large" />
 
             </LinearLayout>
-
-            <TextView
-                android:id="@+id/tvLogout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_margin="@dimen/activity_margin_extra_large"
-                android:gravity="center"
-                android:padding="@dimen/activity_margin"
-                android:text="Logout"
-                android:textColor="@color/primary_dark"
-                android:textSize="@dimen/text_size_large"
-                android:textStyle="bold"/>
-
         </RelativeLayout>
     </RelativeLayout>
 

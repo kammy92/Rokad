@@ -36,7 +36,6 @@ dependencies {
     compile 'com.mcxiaoke.volley:library-aar:1.0.0'
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.daimajia.slider:library:1.1.5@aar'
-    compile 'com.borax12.materialdaterangepicker:library:1.9'
     compile 'com.afollestad.material-dialogs:commons:0.9.0.2'
     testCompile 'junit:junit:4.12'
 }

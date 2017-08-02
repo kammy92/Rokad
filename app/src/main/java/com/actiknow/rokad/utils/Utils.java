@@ -2,8 +2,10 @@ package com.actiknow.rokad.utils;
 
 import android.app.Activity;
 import android.app.ActivityManager;
+import android.app.DatePickerDialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.app.TimePickerDialog;
 import android.content.ActivityNotFoundException;
 import android.content.ComponentName;
 import android.content.ContentResolver;
@@ -44,9 +46,12 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
+
 import com.actiknow.rokad.R;
 import com.actiknow.rokad.app.AppController;
 import com.android.volley.DefaultRetryPolicy;
@@ -135,8 +140,36 @@ public class Utils {
             return "Unavailable";
         }
     }
-
-
+    
+    
+    public static void pickupDate (Context context,final EditText etPickupDate) {
+        final Calendar c = Calendar.getInstance ();
+        int mYear = c.get (Calendar.YEAR);
+        int mMonth = c.get (Calendar.MONTH);
+        int mDay = c.get (Calendar.DAY_OF_MONTH);
+        
+        DatePickerDialog datePickerDialog;
+        datePickerDialog = new DatePickerDialog (context, new DatePickerDialog.OnDateSetListener () {
+            @Override
+            public void onDateSet (DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                etPickupDate.setText (String.format ("%02d", dayOfMonth) + "-" + String.format ("%02d", monthOfYear + 1) + "-" + year);
+            }
+        }, mYear, mMonth, mDay);
+        datePickerDialog.show ();
+    }
+    
+    public static void pickupTime (Context context, final EditText etPickupTime) {
+        Calendar c = Calendar.getInstance ();
+        int mHour = c.get (Calendar.HOUR_OF_DAY);
+        int mMinute = c.get (Calendar.MINUTE);
+        TimePickerDialog timePickerDialog = new TimePickerDialog (context, new TimePickerDialog.OnTimeSetListener () {
+            @Override
+            public void onTimeSet (TimePicker view, int hourOfDay, int minute) {
+                etPickupTime.setText (String.format ("%02d", hourOfDay) + ":" + String.format ("%02d", minute));
+            }
+        }, mHour, mMinute, false);
+        timePickerDialog.show ();
+    }
 
 /*
         AlertDialog.Builder builder = new AlertDialog.Builder (activity);

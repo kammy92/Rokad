@@ -11,23 +11,17 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
-import android.view.inputmethod.CorrectionInfo;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.actiknow.rokad.R;
 import com.actiknow.rokad.utils.AppConfigTags;
 import com.actiknow.rokad.utils.AppConfigURL;
 import com.actiknow.rokad.utils.Constants;
 import com.actiknow.rokad.utils.NetworkConnection;
-import com.actiknow.rokad.utils.TypefaceSpan;
 import com.actiknow.rokad.utils.UserDetailsPref;
 import com.actiknow.rokad.utils.Utils;
 import com.android.volley.AuthFailureError;
@@ -99,46 +93,58 @@ public class LoginActivity extends AppCompatActivity {
         tvSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SpannableString s = new SpannableString(getResources().getString(R.string.please_enter_mobile));
-                s.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                SpannableString s2 = new SpannableString(getResources().getString(R.string.please_enter_valid_mobile));
-                s2.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                SpannableString s3 = new SpannableString(getResources().getString(R.string.please_enter_valid_mobile));
-                s3.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s3.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-                SpannableString s4 = new SpannableString(getResources().getString(R.string.please_enter_password));
-                s4.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s4.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+    
+                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
+                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_NAME, "Karman");
+                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_MOBILE, "9873684678");
+                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_EMAIL, "karman.singh@actiknowbi.com");
 
-                if (etMobile.getText().toString().trim().length() == 0) {
-                    etMobile.setError(s);
-                } else if (etPassword.getText().toString().trim().length() == 0) {
-                    etPassword.setError(s4);
-                } else {
-                    try {
-                        switch (Utils.isValidMobile(etMobile.getText().toString())) {
-                            case 1:
-                                etMobile.setError(s2);
-                                break;
-                            case 2:
-                                etMobile.setError(s2);
-                                break;
-                            case 3:
-                                //  LoginFromServer(etMobile.getText().toString(), etPassword.getText().toString(), jsonDeviceDetails.toString ());
-                                // getOTP(etMobile.getText().toString());
-                                userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                startActivity(intent);
-                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                                break;
-                            case 4:
-                                etMobile.setError(s3);
-                                break;
-                        }
-                    } catch (NumberFormatException e) {
-                        e.printStackTrace();
-                        etMobile.setError(s3);
-                    }
-                }
+                Intent intent = new Intent (LoginActivity.this, MainActivity.class);
+                intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity (intent);
+                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
+    
+//                SpannableString s = new SpannableString(getResources().getString(R.string.please_enter_mobile));
+//                s.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                SpannableString s2 = new SpannableString(getResources().getString(R.string.please_enter_valid_mobile));
+//                s2.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                SpannableString s3 = new SpannableString(getResources().getString(R.string.please_enter_valid_mobile));
+//                s3.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s3.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+//                SpannableString s4 = new SpannableString(getResources().getString(R.string.please_enter_password));
+//                s4.setSpan(new TypefaceSpan(LoginActivity.this, Constants.font_name), 0, s4.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//
+//                if (etMobile.getText().toString().trim().length() == 0) {
+//                    etMobile.setError(s);
+//                } else if (etPassword.getText().toString().trim().length() == 0) {
+//                    etPassword.setError(s4);
+//                } else {
+//                    try {
+//                        switch (Utils.isValidMobile(etMobile.getText().toString())) {
+//                            case 1:
+//                                etMobile.setError(s2);
+//                                break;
+//                            case 2:
+//                                etMobile.setError(s2);
+//                                break;
+//                            case 3:
+//                                //  LoginFromServer(etMobile.getText().toString(), etPassword.getText().toString(), jsonDeviceDetails.toString ());
+//                                // getOTP(etMobile.getText().toString());
+//
+//                                userDetailsPref.putStringPref(LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
+//                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+//                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//                                startActivity(intent);
+//                                overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                                break;
+//                            case 4:
+//                                etMobile.setError(s3);
+//                                break;
+//                        }
+//                    } catch (NumberFormatException e) {
+//                        e.printStackTrace();
+//                        etMobile.setError(s3);
+//                    }
+//                }
             }
         });
 
