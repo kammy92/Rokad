@@ -95,7 +95,7 @@ public class TruckEntryActivity extends AppCompatActivity {
     public void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         progressDialog = new ProgressDialog (this);
-        
+        etParty.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_NAME));
     }
     
     
@@ -119,47 +119,73 @@ public class TruckEntryActivity extends AppCompatActivity {
         tvSubmit.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View view) {
-//                if (etLrNo.getText ().toString ().length () == 0) {
-//                    etLrNo.setError ("Please fill LR Number");
-//                } else if (etWeight.getText ().toString ().length () == 0) {
-//                    etWeight.setError ("Please fill Weight");
-//                } else if (etDate.getText ().toString ().length () == 0) {
-//                    etDate.setError ("Please fill Date");
-//                } else if (etNumberPlate1.getText ().toString ().length () == 0) {
-//                    etNumberPlate1.setError ("Please fill TruckNumber");
-//                } else if (etNumberPlate2.getText ().toString ().length () == 0) {
-//                    etNumberPlate2.setError ("Please fill TruckNumber");
-//                } else if (etNumberPlate3.getText ().toString ().length () == 0) {
-//                    etNumberPlate3.setError ("Please fill TruckNumber");
-//                } else if (etNumberPlate4.getText ().toString ().length () == 0) {
-//                    etNumberPlate4.setError ("Please fill TruckNumber");
-//                } else if (etDestination.getText ().toString ().length () == 0) {
-//                    etDestination.setError ("Please fill Destination");
-//                } else if (etOrderNo.getText ().toString ().length () == 0) {
-//                    etOrderNo.setError ("Please fill Order Number");
-//                } else if (etInvoiceNo.getText ().toString ().length () == 0) {
-//                    etInvoiceNo.setError ("Please fill Invoice Number");
-//                } else if (etParty.getText ().toString ().length () == 0) {
-//                    etParty.setError ("Please fill Party Name");
-//                } else if (etCashAdvance.getText ().toString ().length () == 0) {
-//                    etCashAdvance.setError ("Please fill Cash Advance");
-//                } else if (etDieselAdvance.getText ().toString ().length () == 0) {
-//                    etDieselAdvance.setError ("Please fill Diesel Advance");
-//                } else if (etBillRate.getText ().toString ().length () == 0) {
-//                    etBillRate.setError ("Please fill Bill Rate");
-//                } else {
-//                    UpdateTruckEntryToServer (etLrNo.getText ().toString (), etWeight.getText ().toString (), etDate.getText ().toString (),
-//                            (etNumberPlate1.getText ().toString () + "" + etNumberPlate2.getText ().toString () + "" + etNumberPlate3.getText ().toString () + "" +
-//                                    etNumberPlate4.getText ().toString ()),
-//                            etDestination.getText ().toString (), etOrderNo.getText ().toString (), etInvoiceNo.getText ().toString (),
-//                            etParty.getText ().toString (), etCashAdvance.getText ().toString (), etDieselAdvance.getText ().toString (),
-//                            etBillRate.getText ().toString ());
-//                }
+                boolean flag = true;
+                if (etLrNo.getText ().toString ().length () == 0) {
+                    etLrNo.setError ("Please fill LR Number");
+                    flag = false;
+                }
+                if (etWeight.getText ().toString ().length () == 0) {
+                    etWeight.setError ("Please fill Weight");
+                    flag = false;
+                }
+                if (etDate.getText ().toString ().length () == 0) {
+                    etDate.setError ("Please fill Date");
+                    flag = false;
+                }
+                if (etNumberPlate1.getText ().toString ().length () == 0 ||
+                        etNumberPlate2.getText ().toString ().length () == 0 ||
+                        etNumberPlate3.getText ().toString ().length () == 0 ||
+                        etNumberPlate4.getText ().toString ().length () == 0) {
+                    etNumberPlate4.setError ("Please fill TruckNumber");
+                    flag = false;
+                }
+                if (etDestination.getText ().toString ().length () == 0) {
+                    etDestination.setError ("Please fill Destination");
+                    flag = false;
+                }
+                if (etOrderNo.getText ().toString ().length () == 0) {
+                    etOrderNo.setError ("Please fill Order Number");
+                    flag = false;
+                }
+                if (etInvoiceNo.getText ().toString ().length () == 0) {
+                    etInvoiceNo.setError ("Please fill Invoice Number");
+                    flag = false;
+                }
+                if (etParty.getText ().toString ().length () == 0) {
+                    etParty.setError ("Please fill Party Name");
+                    flag = false;
+                }
+                if (etCashAdvance.getText ().toString ().length () == 0) {
+                    etCashAdvance.setError ("Please fill Cash Advance");
+                    flag = false;
+                }
+                if (etDieselAdvance.getText ().toString ().length () == 0) {
+                    etDieselAdvance.setError ("Please fill Diesel Advance");
+                    flag = false;
+                }
+                if (etBillRate.getText ().toString ().length () == 0) {
+                    etBillRate.setError ("Please fill Bill Rate");
+                    flag = false;
+                }
                 
-                finish ();
+                if (flag) {
+                    String truckNumber = etNumberPlate1.getText ().toString () + etNumberPlate2.getText ().toString () + etNumberPlate3.getText ().toString () + etNumberPlate4.getText ().toString ();
+                    UpdateTruckEntryToServer (
+                            etLrNo.getText ().toString (),
+                            etWeight.getText ().toString (),
+                            etDate.getText ().toString (),
+                            truckNumber,
+                            etDestination.getText ().toString (),
+                            etOrderNo.getText ().toString (),
+                            etInvoiceNo.getText ().toString (),
+                            userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_ID),
+                            userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_NAME),
+                            etCashAdvance.getText ().toString (),
+                            etDieselAdvance.getText ().toString (),
+                            etBillRate.getText ().toString ());
+                }
             }
         });
-        
         
         etNumberPlate1.addTextChangedListener (new TextWatcher () {
             public void onTextChanged (CharSequence s, int start, int before, int count) {
@@ -179,7 +205,6 @@ public class TruckEntryActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-        
         etNumberPlate2.addTextChangedListener (new TextWatcher () {
             public void onTextChanged (CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
@@ -198,7 +223,6 @@ public class TruckEntryActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-        
         etNumberPlate3.addTextChangedListener (new TextWatcher () {
             public void onTextChanged (CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
@@ -217,7 +241,6 @@ public class TruckEntryActivity extends AppCompatActivity {
                 // TODO Auto-generated method stub
             }
         });
-        
         etNumberPlate4.addTextChangedListener (new TextWatcher () {
             public void onTextChanged (CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
@@ -238,9 +261,8 @@ public class TruckEntryActivity extends AppCompatActivity {
         });
     }
     
-    
     private void UpdateTruckEntryToServer (final String lr_number, final String weight, final String date, final String truck_number,
-                                           final String destination, final String order_number, final String invoice_number, final String party_name,
+                                           final String destination, final String order_number, final String invoice_number, final String party_id, final String party_name,
                                            final String cash_advance, final String diesel_advance, final String bill_date) {
         if (NetworkConnection.isNetworkAvailable (TruckEntryActivity.this)) {
             
@@ -299,10 +321,11 @@ public class TruckEntryActivity extends AppCompatActivity {
                     params.put (AppConfigTags.DESTINATION, destination);
                     params.put (AppConfigTags.ORDER_NUMBER, order_number);
                     params.put (AppConfigTags.INVOICE_NUMBER, invoice_number);
+                    params.put (AppConfigTags.PARTY_ID, party_id);
                     params.put (AppConfigTags.PARTY_NAME, party_name);
                     params.put (AppConfigTags.CASH_ADVANCE, cash_advance);
                     params.put (AppConfigTags.DIESEL_ADVANCE, diesel_advance);
-                    params.put (AppConfigTags.BILL_DATE, bill_date);
+                    params.put (AppConfigTags.BILL_RATE, bill_date);
                     Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
                     return params;
                 }
@@ -311,7 +334,7 @@ public class TruckEntryActivity extends AppCompatActivity {
                 public Map<String, String> getHeaders () throws AuthFailureError {
                     Map<String, String> params = new HashMap<> ();
                     params.put (AppConfigTags.HEADER_API_KEY, Constants.api_key);
-                    params.put (AppConfigTags.USER_LOGIN_KEY, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_LOGIN_KEY));
+                    params.put (AppConfigTags.HEADER_USER_LOGIN_KEY, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_LOGIN_KEY));
                     Utils.showLog (Log.INFO, AppConfigTags.HEADERS_SENT_TO_THE_SERVER, "" + params, false);
                     return params;
                 }

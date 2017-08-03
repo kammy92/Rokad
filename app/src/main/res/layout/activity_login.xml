@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/clMain"
@@ -7,7 +6,7 @@
     android:layout_height="match_parent"
     android:animateLayoutChanges="true"
     android:background="@color/app_background_color">
--->
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
@@ -32,23 +31,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-
             <TextView
-                android:id="@+id/tvMobile"
+                android:id="@+id/tvUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/activity_margin"
                 android:layout_marginRight="@dimen/activity_margin"
                 android:layout_marginTop="@dimen/activity_margin_small"
-                android:inputType="number"
-                android:text="@string/activity_login_hint_mobile"
+                android:inputType="text"
+                android:text="@string/activity_login_hint_username"
                 android:textColor="@color/primary"
                 android:textSize="@dimen/text_size_extra_small"/>
 
 
             <EditText
-                android:id="@+id/etMobile"
+                android:id="@+id/etUsername"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/activity_margin_small"
@@ -77,14 +74,10 @@
                 android:layout_marginBottom="@dimen/activity_margin_small"
                 android:layout_marginLeft="@dimen/activity_margin"
                 android:layout_marginRight="@dimen/activity_margin"
-
                 android:background="@drawable/edittext_underline"
                 android:inputType="textPassword"
                 android:textSize="@dimen/text_size_medium"/>
-
         </LinearLayout>
-
-
         <TextView
             android:id="@+id/tvSubmit"
             android:layout_width="match_parent"
@@ -100,11 +93,6 @@
             android:text="@string/activity_login_button_submit"
             android:textColor="@color/text_color_white"
             android:textSize="@dimen/text_size_large"/>
-
-
     </LinearLayout>
-
-
 </RelativeLayout>
-    <!--
-    </android.support.design.widget.CoordinatorLayout>-->
+</android.support.design.widget.CoordinatorLayout>

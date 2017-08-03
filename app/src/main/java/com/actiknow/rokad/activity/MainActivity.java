@@ -124,10 +124,13 @@ public class MainActivity extends AppCompatActivity {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
-                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_MOBILE, "");
                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_NAME, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_MOBILE, "");
                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_EMAIL, "");
-                        userDetailsPref.putStringPref(MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_TYPE, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_PARTY_ID, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_PARTY_NAME, "");
                         Intent intent = new Intent(MainActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

@@ -1,33 +1,36 @@
 <resources>
     <string name="app_name">LIVFRIEGHT</string>
     <string name="activity_login_hint_email">Email</string>
-    <string name="activity_login_hint_mobile">Mobile/मोबाइल</string>
+    <string name="activity_login_hint_username">Username/यूज़रनेम</string>
     <string name="activity_password">Password/पासवर्ड</string>
     <string name="activity_login_button_submit">SUBMIT/सबमिट करे</string>
     
-    <string name="activity_main_truck_entry">Truck Entry</string>
-    <string name="activity_main_receiving">Receiving</string>
-    <string name="activity_main_rokad">Rokad</string>
-    
-    <string name="activity_lr_no">LR NO.</string>
-    <string name="activity_weight">Weight</string>
-    <string name="activity_date">Date</string>
-    <string name="activity_truck_no">Truck No.</string>
-    <string name="activity_destination">Destination</string>
-    <string name="activity_order_no">Order No.</string>
-    <string name="activity_invoice_no">Invoice No.</string>
-    <string name="activity_party">Party Name</string>
-    <string name="activity_cash_advance">Cash Advance</string>
-    <string name="activity_diesel_advance">Diesel Advance</string>
-    <string name="activity_bill_rate">Bill Rate</string>
 
-    <string name="activity_office">Office</string>
-    <string name="activity_total_bhada">Total Bhada</string>
-    <string name="activity_total_advance">Total Advance</string>
-    <string name="activity_shortage">Shortage</string>
-    <string name="activity_commission">Commission</string>
+    <string name="activity_main_truck_entry">Truck Entry/ट्रक एंट्री</string>
+    <string name="activity_main_receiving">Receiving/रिसीविंग</string>
+    <string name="activity_main_rokad">Rokad/रोकड़</string>
+
+    <string name="activity_lr_no">LR Number/एलआर नंबर</string>
+    <string name="activity_weight">Weight/वजन</string>
+    <string name="activity_date">Date/तारीख</string>
+    <string name="activity_truck_no">Truck No./ट्रक नंबर</string>
+    <string name="activity_destination">Destination/स्थान</string>
+    <string name="activity_order_no">Order No./आर्डर नंबर</string>
+    <string name="activity_invoice_no">Invoice No./इनवॉइस नंबर</string>
+    <string name="activity_party">Party Name/पार्टी का नाम</string>
+    <string name="activity_cash_advance">Cash Advance/कॅश एडवांस</string>
+    <string name="activity_diesel_advance">Diesel Advance/डीजल एडवांस</string>
+    <string name="activity_bill_rate">Bill Rate/बिल रेट</string>
+
+    <string name="activity_office">Office/ऑफिस</string>
+    <string name="activity_total_bhada">Total Bhada/टोटल भड़ा</string>
+    <string name="activity_total_advance">Total Advance/टोटल एडवांस</string>
+    <string name="activity_shortage">Shortage/शोर्टैज</string>
+    <string name="activity_commission">Commission/कमीशन</string>
 
 
+
+    <string name="please_enter_username">Please enter Username</string>
     <string name="please_enter_email">Please enter Email</string>
     <string name="please_enter_mobile">Please enter Mobile</string>
     <string name="please_enter_valid_mobile">Please enter valid Mobile</string>

@@ -16,18 +16,19 @@ public class AppConfigTags {
     public static final String ERROR = "error";
     public static final String DATABASE_LOG = "DATABASE LOG";
     public static final String HEADER_API_KEY = "api-key";
-    public static final String HEADER_BUYER_LOGIN_KEY = "buyer-login-key";
-
-
+    public static final String HEADER_USER_LOGIN_KEY = "user-login-key";
+    
+    
+    public static final String USERNAME = "username";
     public static final String USER_NAME = "user_name";
     public static final String USER_EMAIL = "user_email";
     public static final String USER_MOBILE = "user_mobile";
     public static final String USER_TYPE = "user_type";
-    public static final String USER_LOGIN_KEY = "user-login-key";
-
-
-
-
+    public static final String USER_PARTY_ID = "user_party_id";
+    public static final String USER_PARTY_NAME = "user_party_name";
+    public static final String USER_LOGIN_KEY = "user_login_key";
+    
+    
     public static String LR_NUMBER = "lr_number";
     public static String WEIGHT = "weight";
     public static String DATE = "date";
@@ -35,24 +36,16 @@ public class AppConfigTags {
     public static String DESTINATION = "destination";
     public static String ORDER_NUMBER = "order_number";
     public static String INVOICE_NUMBER = "invoice_number";
+    public static String PARTY_ID = "party_id";
     public static String PARTY_NAME = "party_name";
     public static String CASH_ADVANCE = "cash_advance";
     public static String DIESEL_ADVANCE = "diesel_advance";
-    public static String BILL_DATE = "bill_date";
+    public static String BILL_RATE = "bill_rate";
 
 
-
-    public static final String STATES = "states";
-    public static String TYPE = "type";
-    
     public static String PASSWORD = "password";
     public static String EMAIL = "email";
     public static String MOBILE = "mobile";
     public static String MESSAGE = "message";
     public static String DEVICE_DETAILS = "device_details";
-    
-
-    
-    
-    
 }

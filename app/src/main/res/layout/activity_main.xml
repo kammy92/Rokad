@@ -1,16 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:plainpie="http://schemas.android.com/apk/res-auto"
     android:id="@+id/clMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
-
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
@@ -18,7 +15,6 @@
             android:animateLayoutChanges="true"
             android:theme="@style/AppTheme.AppBarOverlay"
             android:visibility="visible">
-
             <android.support.v7.widget.Toolbar
                 xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar"
@@ -83,20 +79,15 @@
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
-
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/appBar">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center_vertical"
                 android:orientation="vertical">
-
-
                 <TextView
                     android:id="@+id/tvTruckEntry"
                     android:layout_width="match_parent"
@@ -112,8 +103,6 @@
                     android:text="@string/activity_main_truck_entry"
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/text_size_extra_large" />
-
-
                 <TextView
                     android:id="@+id/tvReceiving"
                     android:layout_width="match_parent"
@@ -124,13 +113,12 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:background="@drawable/button_bg"
                     android:elevation="@dimen/button_elevation"
+                    android:visibility="gone"
                     android:gravity="center"
                     android:padding="@dimen/activity_margin"
                     android:text="@string/activity_main_receiving"
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/text_size_extra_large" />
-
-
                 <TextView
                     android:id="@+id/tvRokad"
                     android:layout_width="match_parent"
@@ -143,12 +131,11 @@
                     android:elevation="@dimen/button_elevation"
                     android:gravity="center"
                     android:padding="@dimen/activity_margin"
+                    android:visibility="gone"
                     android:text="@string/activity_main_rokad"
                     android:textColor="@color/text_color_white"
                     android:textSize="@dimen/text_size_extra_large" />
-
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
-
 </android.support.design.widget.CoordinatorLayout>

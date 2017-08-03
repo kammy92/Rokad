@@ -11,6 +11,8 @@ public class UserDetailsPref {
     public static String USER_MOBILE = "user_mobile";
     public static String USER_TYPE = "user_type";
     public static String USER_LOGIN_KEY = "user_login_key";
+    public static String USER_PARTY_ID = "user_party_id";
+    public static String USER_PARTY_NAME = "user_party_name";
     public static String USER_FIREBASE_ID = "user_firebase_id";
     public static String LOGGED_IN_SESSION = "logged_in_session";
     private static UserDetailsPref userDetailsPref;
