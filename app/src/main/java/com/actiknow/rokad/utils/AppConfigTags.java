@@ -24,6 +24,8 @@ public class AppConfigTags {
     public static final String USER_EMAIL = "user_email";
     public static final String USER_MOBILE = "user_mobile";
     public static final String USER_TYPE = "user_type";
+    public static final String USER_COMPANY_ID = "user_company_id";
+    public static final String USER_COMPANY_NAME = "user_company_name";
     public static final String USER_PARTY_ID = "user_party_id";
     public static final String USER_PARTY_NAME = "user_party_name";
     public static final String USER_LOGIN_KEY = "user_login_key";
@@ -38,6 +40,8 @@ public class AppConfigTags {
     public static String INVOICE_NUMBER = "invoice_number";
     public static String PARTY_ID = "party_id";
     public static String PARTY_NAME = "party_name";
+    public static String COMPANY_ID = "company_id";
+    public static String COMPANY_NAME = "company_name";
     public static String CASH_ADVANCE = "cash_advance";
     public static String DIESEL_ADVANCE = "diesel_advance";
     public static String BILL_RATE = "bill_rate";
@@ -48,4 +52,15 @@ public class AppConfigTags {
     public static String MOBILE = "mobile";
     public static String MESSAGE = "message";
     public static String DEVICE_DETAILS = "device_details";
+    
+    public static String VERSION_UPDATE = "version_update";
+    public static String VERSION_CODE = "version_code";
+    public static String VERSION_ACTIVE = "version_active";
+    public static String VERSION_CRITICAL = "version_critical";
+    public static String VERSION_CHANGE_LOG = "version_change_log";
+    public static String VERSION_UPDATED_ON = "version_updated_on";
+    public static String SUBSCRIPTION_EXPIRED = "subscription_expired";
+    public static String SUBSCRIPTION_STATUS = "subscription_status";
+    public static String SUBSCRIPTION_EXPIRES_IN = "subscription_expires_in";
+    public static String SUBSCRIPTION_EXPIRES_AT = "subscription_expires_at";
 }

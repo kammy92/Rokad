@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -22,6 +23,7 @@ import com.actiknow.rokad.utils.Constants;
 import com.actiknow.rokad.utils.NetworkConnection;
 import com.actiknow.rokad.utils.UserDetailsPref;
 import com.actiknow.rokad.utils.Utils;
+import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -98,7 +100,6 @@ public class TruckEntryActivity extends AppCompatActivity {
         etParty.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_NAME));
     }
     
-    
     private void initListener () {
         rlBack.setOnClickListener (new View.OnClickListener () {
             @Override
@@ -114,7 +115,6 @@ public class TruckEntryActivity extends AppCompatActivity {
                 Utils.pickupDate (TruckEntryActivity.this, etDate);
             }
         });
-        
         
         tvSubmit.setOnClickListener (new View.OnClickListener () {
             @Override
@@ -169,17 +169,15 @@ public class TruckEntryActivity extends AppCompatActivity {
                 }
                 
                 if (flag) {
-                    String truckNumber = etNumberPlate1.getText ().toString () + etNumberPlate2.getText ().toString () + etNumberPlate3.getText ().toString () + etNumberPlate4.getText ().toString ();
+                    String truckNumber = etNumberPlate1.getText ().toString () + " " + etNumberPlate2.getText ().toString () + " " + etNumberPlate3.getText ().toString () + " " + etNumberPlate4.getText ().toString ();
                     UpdateTruckEntryToServer (
                             etLrNo.getText ().toString (),
                             etWeight.getText ().toString (),
-                            etDate.getText ().toString (),
+                            Utils.convertTimeFormat (etDate.getText ().toString (), "dd-MM-yyyy", "yyyy-MM-dd"),
                             truckNumber,
                             etDestination.getText ().toString (),
                             etOrderNo.getText ().toString (),
                             etInvoiceNo.getText ().toString (),
-                            userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_ID),
-                            userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_NAME),
                             etCashAdvance.getText ().toString (),
                             etDieselAdvance.getText ().toString (),
                             etBillRate.getText ().toString ());
@@ -226,8 +224,7 @@ public class TruckEntryActivity extends AppCompatActivity {
         etNumberPlate3.addTextChangedListener (new TextWatcher () {
             public void onTextChanged (CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
-                if (etNumberPlate3.getText ().toString ().length () == 2)     //size as per your requirement
-                {
+                if (etNumberPlate3.getText ().toString ().length () == 3) {
                     etNumberPlate4.requestFocus ();
                 }
             }
@@ -244,8 +241,7 @@ public class TruckEntryActivity extends AppCompatActivity {
         etNumberPlate4.addTextChangedListener (new TextWatcher () {
             public void onTextChanged (CharSequence s, int start, int before, int count) {
                 // TODO Auto-generated method stub
-                if (etNumberPlate4.getText ().toString ().length () == 4)     //size as per your requirement
-                {
+                if (etNumberPlate4.getText ().toString ().length () == 4) {
                     etDestination.requestFocus ();
                 }
             }
@@ -261,11 +257,8 @@ public class TruckEntryActivity extends AppCompatActivity {
         });
     }
     
-    private void UpdateTruckEntryToServer (final String lr_number, final String weight, final String date, final String truck_number,
-                                           final String destination, final String order_number, final String invoice_number, final String party_id, final String party_name,
-                                           final String cash_advance, final String diesel_advance, final String bill_date) {
+    private void UpdateTruckEntryToServer (final String lr_number, final String weight, final String date, final String truck_number, final String destination, final String order_number, final String invoice_number, final String cash_advance, final String diesel_advance, final String bill_date) {
         if (NetworkConnection.isNetworkAvailable (TruckEntryActivity.this)) {
-            
             Utils.showProgressDialog (progressDialog, getResources ().getString (R.string.progress_dialog_text_please_wait), true);
             Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_TRUCK_ENTRY, true);
             StringRequest strRequest1 = new StringRequest (Request.Method.POST, AppConfigURL.URL_TRUCK_ENTRY,
@@ -279,9 +272,16 @@ public class TruckEntryActivity extends AppCompatActivity {
                                     boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
                                     String message = jsonObj.getString (AppConfigTags.MESSAGE);
                                     if (! error) {
-                                        MaterialDialog dialog = new MaterialDialog.Builder (TruckEntryActivity.this)
+                                        new MaterialDialog.Builder (TruckEntryActivity.this)
                                                 .content (message)
                                                 .positiveText ("OK")
+                                                .onPositive (new MaterialDialog.SingleButtonCallback () {
+                                                    @Override
+                                                    public void onClick (@NonNull MaterialDialog dialog, @NonNull DialogAction which) {
+                                                        dialog.dismiss ();
+                                                        finish ();
+                                                    }
+                                                })
                                                 .show ();
                                     } else {
                                         Utils.showSnackBar (TruckEntryActivity.this, clMain, message, Snackbar.LENGTH_LONG, null, null);
@@ -321,8 +321,8 @@ public class TruckEntryActivity extends AppCompatActivity {
                     params.put (AppConfigTags.DESTINATION, destination);
                     params.put (AppConfigTags.ORDER_NUMBER, order_number);
                     params.put (AppConfigTags.INVOICE_NUMBER, invoice_number);
-                    params.put (AppConfigTags.PARTY_ID, party_id);
-                    params.put (AppConfigTags.PARTY_NAME, party_name);
+                    params.put (AppConfigTags.COMPANY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_COMPANY_ID));
+                    params.put (AppConfigTags.PARTY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_ID));
                     params.put (AppConfigTags.CASH_ADVANCE, cash_advance);
                     params.put (AppConfigTags.DIESEL_ADVANCE, diesel_advance);
                     params.put (AppConfigTags.BILL_RATE, bill_date);

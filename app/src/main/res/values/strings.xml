@@ -56,4 +56,31 @@
     <string name="snackbar_action_retry">RETRY</string>
 
     <string name="snackbar_action_undo">UNDO</string>
+
+
+    <string name="dialog_text_new_version_available">New version of the application is available.
+        Please update
+    </string>
+    <string name="dialog_text_subscription_expired">Your subscription has expired. The app will
+        Logout now
+    </string>
+
+
+    <string name="dialog_hint_optional">optional</string>
+
+    <string name="dialog_action_yes">YES</string>
+    <string name="dialog_action_no">NO</string>
+    <string name="dialog_action_ok">OK</string>
+    <string name="dialog_action_cancel">CANCEL</string>
+    <string name="dialog_action_save">SAVE</string>
+    <string name="dialog_action_logout">LOGOUT</string>
+    <string name="dialog_action_submit">SUBMIT</string>
+    <string name="dialog_action_resend_otp">RESEND OTP</string>
+    <string name="dialog_action_proceed">PROCEED</string>
+    <string name="dialog_action_ignore">IGNORE</string>
+    <string name="dialog_action_update">UPDATE</string>
+    <string name="dialog_action_close">CLOSE</string>
+    <string name="dialog_action_show_all">SHOW ALL</string>
+
+
 </resources>
