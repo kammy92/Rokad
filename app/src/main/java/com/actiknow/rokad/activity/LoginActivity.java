@@ -80,16 +80,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick (View view) {
                 Utils.hideSoftKeyboard (LoginActivity.this);
-//                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_LOGIN_KEY, "1");
-//                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_NAME, "Karman");
-//                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_MOBILE, "9873684678");
-//                userDetailsPref.putStringPref (LoginActivity.this, UserDetailsPref.USER_EMAIL, "karman.singh@actiknowbi.com");
-//
-//                Intent intent = new Intent (LoginActivity.this, MainActivity.class);
-//                intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                startActivity (intent);
-//                overridePendingTransition (R.anim.slide_in_right, R.anim.slide_out_left);
-                
                 SpannableString s = new SpannableString (getResources ().getString (R.string.please_enter_username));
                 s.setSpan (new TypefaceSpan (LoginActivity.this, Constants.font_name), 0, s.length (), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                 SpannableString s4 = new SpannableString (getResources ().getString (R.string.please_enter_password));
