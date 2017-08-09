@@ -149,10 +149,13 @@ public class MainActivity extends AppCompatActivity {
                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_EMAIL, "");
                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_TYPE, "");
                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
-                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_PARTY_ID, "");
-                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_PARTY_NAME, "");
-                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_COMPANY_ID, "");
-                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_COMPANY_NAME, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTY_ID, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTY_NAME, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.COMPANY_ID, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.COMPANY_NAME, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTIES_JSON, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.TRUCKS_JSON, "");
+                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.DESTINATIONS_JSON, "");
                         Intent intent = new Intent (MainActivity.this, LoginActivity.class);
                         intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity (intent);
@@ -442,10 +445,13 @@ public class MainActivity extends AppCompatActivity {
                                                             userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_EMAIL, "");
                                                             userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_TYPE, "");
                                                             userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_LOGIN_KEY, "");
-                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_PARTY_ID, "");
-                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_PARTY_NAME, "");
-                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_COMPANY_ID, "");
-                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_COMPANY_NAME, "");
+                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTY_ID, "");
+                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTY_NAME, "");
+                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.COMPANY_ID, "");
+                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.COMPANY_NAME, "");
+                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTIES_JSON, "");
+                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.TRUCKS_JSON, "");
+                                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.DESTINATIONS_JSON, "");
                                                             Intent intent = new Intent (MainActivity.this, LoginActivity.class);
                                                             intent.setFlags (Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                                             startActivity (intent);
@@ -454,6 +460,9 @@ public class MainActivity extends AppCompatActivity {
                                                     })
                                                     .show ();
                                         }
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTIES_JSON, jsonObj.getJSONArray (AppConfigTags.PARTIES).toString ());
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.TRUCKS_JSON, jsonObj.getJSONArray (AppConfigTags.TRUCKS).toString ());
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.DESTINATIONS_JSON, jsonObj.getJSONArray (AppConfigTags.DESTINATIONS).toString ());
                                     }
                                 } catch (Exception e) {
                                     e.printStackTrace ();

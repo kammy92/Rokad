@@ -11,10 +11,14 @@ public class UserDetailsPref {
     public static String USER_MOBILE = "user_mobile";
     public static String USER_TYPE = "user_type";
     public static String USER_LOGIN_KEY = "user_login_key";
-    public static String USER_COMPANY_ID = "user_company_id";
-    public static String USER_COMPANY_NAME = "user_company_name";
-    public static String USER_PARTY_ID = "user_party_id";
-    public static String USER_PARTY_NAME = "user_party_name";
+    public static String COMPANY_ID = "company_id";
+    public static String COMPANY_NAME = "company_name";
+    public static String PARTY_ID = "party_id";
+    public static String PARTY_NAME = "party_name";
+    public static String PARTIES_JSON = "parties_json";
+    public static String TRUCKS_JSON = "trucks_json";
+    public static String DESTINATIONS_JSON = "destination_json";
+    
     public static String USER_FIREBASE_ID = "user_firebase_id";
     public static String LOGGED_IN_SESSION = "logged_in_session";
     private static UserDetailsPref userDetailsPref;

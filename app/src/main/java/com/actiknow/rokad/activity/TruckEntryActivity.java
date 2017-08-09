@@ -97,7 +97,7 @@ public class TruckEntryActivity extends AppCompatActivity {
     public void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         progressDialog = new ProgressDialog (this);
-        etParty.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_NAME));
+        etParty.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_NAME));
     }
     
     private void initListener () {
@@ -321,8 +321,8 @@ public class TruckEntryActivity extends AppCompatActivity {
                     params.put (AppConfigTags.DESTINATION, destination);
                     params.put (AppConfigTags.ORDER_NUMBER, order_number);
                     params.put (AppConfigTags.INVOICE_NUMBER, invoice_number);
-                    params.put (AppConfigTags.COMPANY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_COMPANY_ID));
-                    params.put (AppConfigTags.PARTY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_PARTY_ID));
+                    params.put (AppConfigTags.COMPANY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.COMPANY_ID));
+                    params.put (AppConfigTags.PARTY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_ID));
                     params.put (AppConfigTags.CASH_ADVANCE, cash_advance);
                     params.put (AppConfigTags.DIESEL_ADVANCE, diesel_advance);
                     params.put (AppConfigTags.BILL_RATE, bill_date);
