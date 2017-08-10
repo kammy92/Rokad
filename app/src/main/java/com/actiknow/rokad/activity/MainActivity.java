@@ -460,6 +460,18 @@ public class MainActivity extends AppCompatActivity {
                                                     })
                                                     .show ();
                                         }
+    
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.COMPANY_ID, jsonObj.getString (AppConfigTags.COMPANY_ID));
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.COMPANY_NAME, jsonObj.getString (AppConfigTags.COMPANY_NAME));
+                                        if (! jsonObj.getString (AppConfigTags.PARTY_ID).equalsIgnoreCase ("null")) {
+                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTY_ID, jsonObj.getString (AppConfigTags.PARTY_ID));
+                                        }
+                                        if (! jsonObj.getString (AppConfigTags.PARTY_NAME).equalsIgnoreCase ("null")) {
+                                            userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTY_NAME, jsonObj.getString (AppConfigTags.PARTY_NAME));
+                                        }
+    
+                                        userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.USER_TYPE, jsonObj.getString (AppConfigTags.USER_TYPE));
+                                        
                                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.PARTIES_JSON, jsonObj.getJSONArray (AppConfigTags.PARTIES).toString ());
                                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.TRUCKS_JSON, jsonObj.getJSONArray (AppConfigTags.TRUCKS).toString ());
                                         userDetailsPref.putStringPref (MainActivity.this, UserDetailsPref.DESTINATIONS_JSON, jsonObj.getJSONArray (AppConfigTags.DESTINATIONS).toString ());
