@@ -1,11 +1,10 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-
-    android:id="@+id/clMain"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:animateLayoutChanges="true"
-    android:background="@color/app_background_color">
+<RelativeLayout android:id="@+id/clMain"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:animateLayoutChanges="true"
+                android:background="@color/app_background_color">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -15,9 +14,10 @@
         android:theme="@style/AppTheme.AppBarOverlay"
         android:visibility="visible">
 
-        <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
             style="@style/Widget.MyApp.ActionBar"
+            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:animateLayoutChanges="true"
@@ -51,7 +51,7 @@
                         android:layout_alignParentStart="true"
                         android:layout_centerVertical="true"
                         android:src="@drawable/ic_back"
-                        android:visibility="visible" />
+                        android:visibility="visible"/>
 
                     <TextView
                         android:id="@+id/tvBack"
@@ -60,10 +60,10 @@
                         android:layout_toEndOf="@+id/ivBack"
                         android:layout_toRightOf="@+id/ivBack"
                         android:gravity="center_vertical"
-                        android:visibility="invisible"
                         android:text="Home"
                         android:textColor="@color/text_color_white"
-                        android:textSize="@dimen/text_size_small" />
+                        android:textSize="@dimen/text_size_small"
+                        android:visibility="invisible"/>
 
 
                     <TextView
@@ -73,7 +73,7 @@
                         android:gravity="center"
                         android:text="@string/activity_main_truck_entry"
                         android:textColor="@color/text_color_white"
-                        android:textSize="@dimen/text_size_medium" />
+                        android:textSize="@dimen/text_size_medium"/>
                 </RelativeLayout>
 
             </RelativeLayout>
@@ -92,7 +92,8 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/tvSubmit">
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            <LinearLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
@@ -108,7 +109,7 @@
                     android:inputType="number"
                     android:text="@string/activity_lr_no"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
 
                 <EditText
@@ -120,7 +121,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:inputType="textCapCharacters"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
 
                 <TextView
                     android:id="@+id/tvWeight"
@@ -131,7 +132,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_weight"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etWeight"
@@ -142,7 +143,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:inputType="number"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
 
                 <TextView
                     android:id="@+id/tvDate"
@@ -153,7 +154,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_date"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etDate"
@@ -164,24 +165,48 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:focusable="false"
-                    android:textSize="@dimen/text_size_medium" />
-
-                <TextView
-                    android:id="@+id/tvTruckNo"
+                    android:textSize="@dimen/text_size_medium"/>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_margin_small"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin_small"
-                    android:text="@string/activity_truck_no"
-                    android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:orientation="horizontal"
+                    android:visibility="visible">
+                    <TextView
+                        android:id="@+id/tvTruckNo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_truck_no"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/text_size_extra_small"/>
+                    <TextView
+                        android:id="@+id/tvSelectTruckNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="@dimen/activity_margin_small"
+                        android:paddingLeft="@dimen/activity_margin"
+                        android:paddingRight="@dimen/activity_margin"
+                        android:paddingTop="@dimen/activity_margin_small"
+                        android:text="@string/activity_truck_number_select"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/text_size_extra_small"/>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="horizontal">
+                    <EditText
+                        android:id="@+id/etTruckNumber"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvTruckNo"
+                        android:layout_toLeftOf="@+id/tvSelectTruckNumber"
+                        android:layout_toStartOf="@+id/tvSelectTruckNumber"
+                        android:background="@drawable/edittext_underline"
+                        android:enabled="false"
+                        android:textSize="@dimen/text_size_medium"/>
 
                     <EditText
                         android:id="@+id/etNumberPlate1"
@@ -190,13 +215,13 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginRight="@dimen/activity_margin"
                         android:background="@drawable/edittext_underline"
+                        android:ems="2"
                         android:gravity="center"
                         android:inputType="textCapCharacters"
                         android:maxLength="2"
-                        android:ems="2"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/text_size_medium" />
-
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="gone"/>
                     <EditText
                         android:id="@+id/etNumberPlate2"
                         android:layout_width="wrap_content"
@@ -204,13 +229,13 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-                        android:ems="2"
                         android:background="@drawable/edittext_underline"
+                        android:ems="2"
                         android:gravity="center"
                         android:inputType="number"
                         android:maxLength="2"
-                        android:textSize="@dimen/text_size_medium" />
-
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="gone"/>
                     <EditText
                         android:id="@+id/etNumberPlate3"
                         android:layout_width="wrap_content"
@@ -219,13 +244,13 @@
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
                         android:background="@drawable/edittext_underline"
+                        android:ems="2"
                         android:gravity="center"
                         android:inputType="textCapCharacters"
                         android:maxLength="3"
-                        android:ems="2"
                         android:textAllCaps="true"
-                        android:textSize="@dimen/text_size_medium" />
-
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="gone"/>
                     <EditText
                         android:id="@+id/etNumberPlate4"
                         android:layout_width="wrap_content"
@@ -233,37 +258,56 @@
                         android:layout_marginBottom="@dimen/activity_margin_small"
                         android:layout_marginLeft="@dimen/activity_margin"
                         android:background="@drawable/edittext_underline"
+                        android:ems="4"
                         android:gravity="center"
                         android:inputType="number"
-                        android:ems="4"
                         android:maxLength="4"
-                        android:textSize="@dimen/text_size_medium" />
-
-                </LinearLayout>
-
-
-                <TextView
-                    android:id="@+id/tvDestination"
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="gone"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:layout_marginTop="@dimen/activity_margin_small"
-                    android:text="@string/activity_destination"
-                    android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
-                <EditText
-                    android:id="@+id/etDestination"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_margin_small"
-                    android:layout_marginLeft="@dimen/activity_margin"
-                    android:inputType="textCapCharacters"
-                    android:layout_marginRight="@dimen/activity_margin"
-                    android:background="@drawable/edittext_underline"
-                    android:textSize="@dimen/text_size_medium" />
+                    <TextView
+                        android:id="@+id/tvDestination"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_destination"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/text_size_extra_small"/>
+                    <TextView
+                        android:id="@+id/tvAddDestination"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:paddingBottom="@dimen/activity_margin_small"
+                        android:paddingLeft="@dimen/activity_margin"
+                        android:paddingRight="@dimen/activity_margin"
+                        android:paddingTop="@dimen/activity_margin_small"
+                        android:text="@string/activity_truck_number_select"
+                        android:textColor="@color/primary"
+                        android:textSize="@dimen/text_size_extra_small"/>
 
+                    <EditText
+                        android:id="@+id/etDestination"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tvDestination"
+                        android:layout_toLeftOf="@+id/tvAddDestination"
+                        android:background="@drawable/edittext_underline"
+                        android:enabled="false"
+                        android:inputType="textCapCharacters"
+                        android:textSize="@dimen/text_size_medium"
+                        android:visibility="visible"/>
+                </RelativeLayout>
                 <TextView
                     android:id="@+id/tvOrderNo"
                     android:layout_width="match_parent"
@@ -273,7 +317,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_order_no"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etOrderNo"
@@ -284,7 +328,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:inputType="textCapCharacters"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
 
                 <TextView
                     android:id="@+id/tvInvoiceNo"
@@ -295,7 +339,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_invoice_no"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etInvoiceNo"
@@ -306,7 +350,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:inputType="textCapCharacters"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
 
                 <TextView
                     android:id="@+id/tvParty"
@@ -317,7 +361,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_party"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etParty"
@@ -328,7 +372,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:enabled="false"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
 
                 <TextView
                     android:id="@+id/tvCashAdvance"
@@ -339,7 +383,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_cash_advance"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etCashAdvance"
@@ -350,7 +394,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:inputType="number"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
 
                 <TextView
                     android:id="@+id/tvDieselAdvance"
@@ -361,7 +405,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_diesel_advance"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etDieselAdvance"
@@ -372,7 +416,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:inputType="number"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
 
 
                 <TextView
@@ -384,7 +428,7 @@
                     android:layout_marginTop="@dimen/activity_margin_small"
                     android:text="@string/activity_bill_rate"
                     android:textColor="@color/primary"
-                    android:textSize="@dimen/text_size_extra_small" />
+                    android:textSize="@dimen/text_size_extra_small"/>
 
                 <EditText
                     android:id="@+id/etBillRate"
@@ -395,9 +439,32 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:inputType="number"
-                    android:textSize="@dimen/text_size_medium" />
+                    android:textSize="@dimen/text_size_medium"/>
+
+                <TextView
+                    android:id="@+id/tvFreightRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:layout_marginTop="@dimen/activity_margin_small"
+                    android:text="@string/activity_freight_rate"
+                    android:textColor="@color/primary"
+                    android:textSize="@dimen/text_size_extra_small"/>
+
+                <EditText
+                    android:id="@+id/etFreightRate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/activity_margin_small"
+                    android:layout_marginLeft="@dimen/activity_margin"
+                    android:layout_marginRight="@dimen/activity_margin"
+                    android:background="@drawable/edittext_underline"
+                    android:inputType="number"
+                    android:textSize="@dimen/text_size_medium"/>
             </LinearLayout>
         </ScrollView>
+
         <TextView
             android:id="@+id/tvSubmit"
             android:layout_width="match_parent"
@@ -413,8 +480,8 @@
             android:padding="@dimen/activity_button"
             android:text="@string/activity_login_button_submit"
             android:textColor="@color/text_color_white"
-            android:textSize="@dimen/text_size_medium" />
+            android:textSize="@dimen/text_size_medium"/>
     </RelativeLayout>
 
 
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>

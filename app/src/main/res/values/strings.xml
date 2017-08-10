@@ -18,7 +18,7 @@
     <string name="activity_order_no">Order No./आर्डर नंबर</string>
     <string name="activity_invoice_no">Invoice No./इनवॉइस नंबर</string>
     <string name="activity_party">Party Name/पार्टी का नाम</string>
-    <string name="activity_cash_advance">Cash Advance/कॅश एडवांस</string>
+    <string name="activity_cash_advance">Cash Advance/कैश एडवांस</string>
     <string name="activity_diesel_advance">Diesel Advance/डीजल एडवांस</string>
     <string name="activity_bill_rate">Bill Rate/बिल रेट</string>
 
@@ -81,6 +81,13 @@
     <string name="dialog_action_update">UPDATE</string>
     <string name="dialog_action_close">CLOSE</string>
     <string name="dialog_action_show_all">SHOW ALL</string>
+
+    <string name="activity_truck_number">Truck Number</string>
+    <string name="activity_truck_owner_name">Owner Name</string>
+    <string name="activity_truck_owner_number">Owner Number</string>
+    <string name="activity_pan_number">Pan Number</string>
+    <string name="activity_freight_rate">Freight Rate/भाड़ा दर</string>
+    <string name="activity_truck_number_select">SELECT</string>
 
 
 </resources>

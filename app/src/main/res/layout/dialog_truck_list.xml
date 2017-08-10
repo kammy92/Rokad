@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/rlList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="visible">
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_refresh_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvTruckList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </RelativeLayout>
+
+
+    <LinearLayout
+        android:id="@+id/rlListInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvTruckNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin"
+            android:inputType="number"
+            android:text="@string/activity_truck_number"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+
+
+        <EditText
+            android:id="@+id/etTruckNo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:background="@drawable/edittext_underline"
+            android:inputType="number"
+            android:textSize="@dimen/text_size_medium"/>
+
+        <TextView
+            android:id="@+id/tvOwnerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:text="@string/activity_truck_owner_name"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+
+        <EditText
+            android:id="@+id/etOwnerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:background="@drawable/edittext_underline"
+            android:inputType="text"
+            android:textSize="@dimen/text_size_medium"/>
+
+        <TextView
+            android:id="@+id/tvOwnerNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:text="@string/activity_truck_owner_number"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+
+        <EditText
+            android:id="@+id/etOwnerNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:background="@drawable/edittext_underline"
+            android:textSize="@dimen/text_size_medium"/>
+
+
+        <TextView
+            android:id="@+id/tvPanNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:text="@string/activity_pan_number"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+
+        <EditText
+            android:id="@+id/etPanNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:layout_marginLeft="@dimen/activity_margin"
+            android:layout_marginRight="@dimen/activity_margin"
+            android:background="@drawable/edittext_underline"
+            android:inputType="text"
+            android:textSize="@dimen/text_size_medium"/>
+
+
+    </LinearLayout>
+
+
+</LinearLayout>

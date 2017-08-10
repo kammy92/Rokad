@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
+
+
+    <TextView
+        android:id="@+id/tvTruckNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/edittext_padding"
+        android:paddingRight="@dimen/edittext_padding"
+        android:text="Truck Number"
+        android:textColor="@color/primary"/>
+
+    <TextView
+        android:id="@+id/OwnerName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/edittext_padding"
+        android:paddingRight="@dimen/edittext_padding"
+        android:text="Owner name"
+        android:textColor="@color/primary"/>
+
+    <TextView
+        android:id="@+id/OwnerNumber"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/edittext_padding"
+        android:paddingRight="@dimen/edittext_padding"
+        android:text="Owner Number"
+        android:textColor="@color/primary"/>
+
+
+</LinearLayout>
