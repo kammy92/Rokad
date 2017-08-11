@@ -1,10 +1,11 @@
-<RelativeLayout android:id="@+id/clMain"
-                xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:animateLayoutChanges="true"
-                android:background="@color/app_background_color">
+<android.support.design.widget.CoordinatorLayout
+    android:id="@+id/clMain"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
+    android:background="@color/app_background_color">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBar"
@@ -282,7 +283,7 @@
                         android:textColor="@color/primary"
                         android:textSize="@dimen/text_size_extra_small"/>
                     <TextView
-                        android:id="@+id/tvAddDestination"
+                        android:id="@+id/tvSelectDestination"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -301,7 +302,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvDestination"
-                        android:layout_toLeftOf="@+id/tvAddDestination"
+                        android:layout_toLeftOf="@+id/tvSelectDestination"
                         android:background="@drawable/edittext_underline"
                         android:enabled="false"
                         android:inputType="textCapCharacters"
@@ -484,4 +485,4 @@
     </RelativeLayout>
 
 
-</RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

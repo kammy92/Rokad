@@ -3,64 +3,107 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-
     <RelativeLayout
-        android:id="@+id/rlList"
+        android:id="@+id/rlTruckList"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:visibility="visible">
-
-        <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/swipe_refresh_layout"
+        <ProgressBar
+            android:id="@+id/progressBarTrucks"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent">
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/rvTruckList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </android.support.v4.widget.SwipeRefreshLayout>
-
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/activity_margin"
+        />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvTruckList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
     </RelativeLayout>
-
-
     <LinearLayout
-        android:id="@+id/rlListInfo"
+        android:id="@+id/llAddTruckDetail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:visibility="gone">
-
         <TextView
             android:id="@+id/tvTruckNo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:layout_marginTop="@dimen/activity_margin"
             android:inputType="number"
             android:text="@string/activity_truck_number"
             android:textColor="@color/primary"
             android:textSize="@dimen/text_size_extra_small"/>
 
-
-        <EditText
-            android:id="@+id/etTruckNo"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_margin_small"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
-            android:background="@drawable/edittext_underline"
-            android:inputType="number"
-            android:textSize="@dimen/text_size_medium"/>
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+            <EditText
+                android:id="@+id/etNumberPlate1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_margin_small"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:background="@drawable/edittext_underline"
+                android:ems="2"
+                android:gravity="center"
+                android:inputType="textCapCharacters"
+                android:maxLength="2"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility="visible"/>
+            <EditText
+                android:id="@+id/etNumberPlate2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_margin_small"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:background="@drawable/edittext_underline"
+                android:ems="2"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="2"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility="visible"/>
+            <EditText
+                android:id="@+id/etNumberPlate3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_margin_small"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:layout_marginRight="@dimen/activity_margin"
+                android:background="@drawable/edittext_underline"
+                android:ems="2"
+                android:gravity="center"
+                android:inputType="textCapCharacters"
+                android:maxLength="3"
+                android:textAllCaps="true"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility="visible"/>
+            <EditText
+                android:id="@+id/etNumberPlate4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/activity_margin_small"
+                android:layout_marginLeft="@dimen/activity_margin"
+                android:background="@drawable/edittext_underline"
+                android:ems="4"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="4"
+                android:textSize="@dimen/text_size_medium"
+                android:visibility="visible"/>
+        </LinearLayout>
 
         <TextView
             android:id="@+id/tvOwnerName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:layout_marginTop="@dimen/activity_margin_small"
             android:text="@string/activity_truck_owner_name"
             android:textColor="@color/primary"
@@ -71,18 +114,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_margin_small"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:background="@drawable/edittext_underline"
-            android:inputType="text"
+            android:inputType="textCapWords"
             android:textSize="@dimen/text_size_medium"/>
 
         <TextView
             android:id="@+id/tvOwnerNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:layout_marginTop="@dimen/activity_margin_small"
             android:text="@string/activity_truck_owner_number"
             android:textColor="@color/primary"
@@ -93,9 +132,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_margin_small"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:background="@drawable/edittext_underline"
+            android:inputType="phone"
             android:textSize="@dimen/text_size_medium"/>
 
 
@@ -103,8 +141,6 @@
             android:id="@+id/tvPanNumber"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:layout_marginTop="@dimen/activity_margin_small"
             android:text="@string/activity_pan_number"
             android:textColor="@color/primary"
@@ -115,14 +151,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/activity_margin_small"
-            android:layout_marginLeft="@dimen/activity_margin"
-            android:layout_marginRight="@dimen/activity_margin"
             android:background="@drawable/edittext_underline"
-            android:inputType="text"
+            android:inputType="textCapCharacters"
             android:textSize="@dimen/text_size_medium"/>
-
-
     </LinearLayout>
-
-
 </LinearLayout>

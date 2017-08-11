@@ -31,6 +31,10 @@ public class AppConfigTags {
     public static final String PARTIES = "parties";
     public static final String TRUCKS = "trucks";
     public static final String DESTINATIONS = "destinations";
+    public static final String DESTINATION_ID = "destination_id";
+    public static final String DESTINATION_PARTY_ID = "destination_party_id";
+    public static final String DESTINATION_NAME = "destination_name";
+    public static final String DESTINATION_ADDRESS = "destination_address";
     public static String LR_NUMBER = "lr_number";
     public static String WEIGHT = "weight";
     public static String DATE = "date";
@@ -60,5 +64,10 @@ public class AppConfigTags {
     public static String SUBSCRIPTION_STATUS = "subscription_status";
     public static String SUBSCRIPTION_EXPIRES_IN = "subscription_expires_in";
     public static String SUBSCRIPTION_EXPIRES_AT = "subscription_expires_at";
+    public static String TRUCK_ID = "truck_id";
+    public static String TRUCK_OWNER_NAME = "truck_owner_name";
+    public static String TRUCK_OWNER_MOBILE = "truck_owner_mobile";
+    public static String TRUCK_OWNER_PAN_CARD = "truck_owner_pan_card";
+    
     
 }

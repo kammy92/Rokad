@@ -85,7 +85,7 @@
     <string name="activity_truck_number">Truck Number</string>
     <string name="activity_truck_owner_name">Owner Name</string>
     <string name="activity_truck_owner_number">Owner Number</string>
-    <string name="activity_pan_number">Pan Number</string>
+    <string name="activity_pan_number">PAN Number</string>
     <string name="activity_freight_rate">Freight Rate/भाड़ा दर</string>
     <string name="activity_truck_number_select">SELECT</string>
 

@@ -73,7 +73,8 @@ public class TruckDetailAdapter extends RecyclerView.Adapter<TruckDetailAdapter.
         
         @Override
         public void onClick (View v) {
-            TruckDetail truckDetail = truckDetailList.get (getLayoutPosition ());
+            mItemClickListener.onItemClick (v, getLayoutPosition ());
+//            TruckDetail truckDetail = truckDetailList.get (getLayoutPosition ());
         }
     }
 }
