@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rlDestinationList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+        <ProgressBar
+            android:id="@+id/progressBarDestination"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/activity_margin"
+        />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvDestinationList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llAddDestination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tvDestinationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:text="@string/activity_truck_destination_name"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+        <EditText
+            android:id="@+id/etDestinationName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:background="@drawable/edittext_underline"
+            android:inputType="textCapWords"
+            android:textSize="@dimen/text_size_medium"/>
+        <TextView
+            android:id="@+id/tvDestinationAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:text="@string/activity_truck_destination_address"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+
+        <EditText
+            android:id="@+id/etDestinationAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:background="@drawable/edittext_underline"
+            android:inputType="textPostalAddress"
+            android:textSize="@dimen/text_size_medium"/>
+
+    </LinearLayout>
+</LinearLayout>

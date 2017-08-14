@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:id="@+id/rlPartyList"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible">
+        <ProgressBar
+            android:id="@+id/progressBarParty"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/activity_margin"
+        />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rvPartyList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"/>
+    </RelativeLayout>
+    <LinearLayout
+        android:id="@+id/llAddParty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <TextView
+            android:id="@+id/tvPartyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:text="@string/activity_truck_destination_name"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+        <EditText
+            android:id="@+id/etPartyName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:background="@drawable/edittext_underline"
+            android:inputType="textCapWords"
+            android:textSize="@dimen/text_size_medium"/>
+        <TextView
+            android:id="@+id/tvPartyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_margin_small"
+            android:text="@string/activity_truck_destination_address"
+            android:textColor="@color/primary"
+            android:textSize="@dimen/text_size_extra_small"/>
+
+        <EditText
+            android:id="@+id/etPartyAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/activity_margin_small"
+            android:background="@drawable/edittext_underline"
+            android:inputType="textPostalAddress"
+            android:textSize="@dimen/text_size_medium"/>
+
+    </LinearLayout>
+</LinearLayout>

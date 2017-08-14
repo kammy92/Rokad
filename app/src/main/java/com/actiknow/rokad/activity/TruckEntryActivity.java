@@ -11,8 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -22,9 +20,12 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.actiknow.rokad.R;
-import com.actiknow.rokad.adapter.TruckDetailAdapter;
+import com.actiknow.rokad.adapter.DestinationAdapter;
+import com.actiknow.rokad.adapter.PartyAdapter;
+import com.actiknow.rokad.adapter.TruckAdapter;
 import com.actiknow.rokad.model.Destination;
-import com.actiknow.rokad.model.TruckDetail;
+import com.actiknow.rokad.model.Party;
+import com.actiknow.rokad.model.Truck;
 import com.actiknow.rokad.utils.AppConfigTags;
 import com.actiknow.rokad.utils.AppConfigURL;
 import com.actiknow.rokad.utils.Constants;
@@ -54,7 +55,9 @@ import java.util.Map;
  */
 
 public class TruckEntryActivity extends AppCompatActivity {
-    final List<TruckDetail> truckDetailList = new ArrayList<> ();
+    final List<Truck> truckList = new ArrayList<> ();
+    final List<Destination> destinationList = new ArrayList<> ();
+    final List<Party> partyList = new ArrayList<> ();
     ProgressDialog progressDialog;
     EditText etLrNo;
     EditText etWeight;
@@ -66,23 +69,45 @@ public class TruckEntryActivity extends AppCompatActivity {
     EditText etCashAdvance;
     EditText etDieselAdvance;
     EditText etBillRate;
+    EditText etCompanyRate;
+    EditText etTotalAdvance;
+    EditText etTotalCompanyBilling;
+    EditText etTotalBhada;
+    
     CoordinatorLayout clMain;
     TextView tvSubmit;
     UserDetailsPref userDetailsPref;
     EditText etTruckNumber;
-    EditText etNumberPlate1;
-    EditText etNumberPlate2;
-    EditText etNumberPlate3;
-    EditText etNumberPlate4;
     RelativeLayout rlBack;
     TextView tvSelectDestination;
     TextView tvSelectTruckNumber;
-    TruckDetailAdapter truckDetailAdapter;
+    TextView tvSelectParty;
+    
+    TruckAdapter truckAdapter;
     MaterialDialog truckDialog;
     RecyclerView rvTrucks;
     LinearLayout llAddTruckDetail;
     RelativeLayout rlTruckList;
     ProgressBar progressBarTrucks;
+    
+    DestinationAdapter destinationAdapter;
+    MaterialDialog destinationDialog;
+    RecyclerView rvDestinations;
+    LinearLayout llAddDestination;
+    RelativeLayout rlDestinationList;
+    ProgressBar progressBarDestination;
+    
+    PartyAdapter partyAdapter;
+    MaterialDialog partyDialog;
+    RecyclerView rvParty;
+    LinearLayout llAddParty;
+    RelativeLayout rlPartyList;
+    ProgressBar progressBarParty;
+    
+    int party_id = 0;
+    int destination_id = 0;
+    int truck_id = 0;
+    
     
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -90,6 +115,7 @@ public class TruckEntryActivity extends AppCompatActivity {
         setContentView (R.layout.activity_truck_entry);
         initView ();
         initData ();
+        initDialogs ();
         initListener ();
     }
     
@@ -104,39 +130,41 @@ public class TruckEntryActivity extends AppCompatActivity {
         etCashAdvance = (EditText) findViewById (R.id.etCashAdvance);
         etDieselAdvance = (EditText) findViewById (R.id.etDieselAdvance);
         etBillRate = (EditText) findViewById (R.id.etBillRate);
+        etCompanyRate = (EditText) findViewById (R.id.etCompanyRate);
+        etTotalAdvance = (EditText) findViewById (R.id.etTotalAdvance);
+        etTotalCompanyBilling = (EditText) findViewById (R.id.etTotalCompanyBilling);
+        etTotalBhada = (EditText) findViewById (R.id.etTotalBhada);
         etTruckNumber = (EditText) findViewById (R.id.etTruckNumber);
-        etNumberPlate1 = (EditText) findViewById (R.id.etNumberPlate1);
-        etNumberPlate2 = (EditText) findViewById (R.id.etNumberPlate2);
-        etNumberPlate3 = (EditText) findViewById (R.id.etNumberPlate3);
-        etNumberPlate4 = (EditText) findViewById (R.id.etNumberPlate4);
         tvSubmit = (TextView) findViewById (R.id.tvSubmit);
         clMain = (CoordinatorLayout) findViewById (R.id.clMain);
         rlBack = (RelativeLayout) findViewById (R.id.rlBack);
     
         tvSelectTruckNumber = (TextView) findViewById (R.id.tvSelectTruckNumber);
         tvSelectDestination = (TextView) findViewById (R.id.tvSelectDestination);
+        tvSelectParty = (TextView) findViewById (R.id.tvSelectParty);
     }
     
     public void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         progressDialog = new ProgressDialog (this);
-        etParty.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_NAME));
+//        etParty.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_NAME));
+    }
     
-        truckDetailAdapter = new TruckDetailAdapter (TruckEntryActivity.this, truckDetailList);
-        boolean wrapInScrollView = true;
+    private void initDialogs () {
+        truckAdapter = new TruckAdapter (TruckEntryActivity.this, truckList);
         truckDialog = new MaterialDialog.Builder (TruckEntryActivity.this)
-                .customView (R.layout.dialog_truck_list, wrapInScrollView)
-                .neutralText ("ADD")
-                .neutralColor (getResources ().getColor (R.color.accent))
-                .positiveText ("REFRESH")
-                .positiveColor (getResources ().getColor (R.color.accent))
+                .customView (R.layout.dialog_truck, true)
+//                .neutralText ("ADD")
+//                .neutralColor (getResources ().getColor (R.color.accent))
+//                .positiveText ("REFRESH")
+//                .positiveColor (getResources ().getColor (R.color.accent))
                 .build ();
-    
+        
         rvTrucks = (RecyclerView) truckDialog.getCustomView ().findViewById (R.id.rvTruckList);
         rlTruckList = (RelativeLayout) truckDialog.getCustomView ().findViewById (R.id.rlTruckList);
         llAddTruckDetail = (LinearLayout) truckDialog.getCustomView ().findViewById (R.id.llAddTruckDetail);
-        progressBarTrucks = (ProgressBar) truckDialog.findViewById (R.id.progressBarTrucks);
-    
+        progressBarTrucks = (ProgressBar) truckDialog.getCustomView ().findViewById (R.id.progressBarTrucks);
+        
         truckDialog.getActionButton (DialogAction.NEUTRAL).setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
@@ -153,22 +181,119 @@ public class TruckEntryActivity extends AppCompatActivity {
                 }
             }
         });
-    
-        truckDetailAdapter.SetOnItemClickListener (new TruckDetailAdapter.OnItemClickListener () {
+        
+        truckAdapter.SetOnItemClickListener (new TruckAdapter.OnItemClickListener () {
             @Override
             public void onItemClick (View view, int position) {
-                TruckDetail truckDetail = truckDetailList.get (position);
-                etTruckNumber.setText (truckDetail.getTruck_number ());
+                Truck truck = truckList.get (position);
+                etTruckNumber.setText (truck.getTruck_number ());
                 truckDialog.dismiss ();
             }
         });
-    
-    
-        rvTrucks.setAdapter (truckDetailAdapter);
+        
+        rvTrucks.setAdapter (truckAdapter);
         rvTrucks.setHasFixedSize (true);
         rvTrucks.setLayoutManager (new LinearLayoutManager (TruckEntryActivity.this, LinearLayoutManager.VERTICAL, false));
         rvTrucks.setItemAnimator (new DefaultItemAnimator ());
         
+        
+        destinationAdapter = new DestinationAdapter (TruckEntryActivity.this, destinationList);
+        destinationDialog = new MaterialDialog.Builder (TruckEntryActivity.this)
+                .customView (R.layout.dialog_destination, true)
+//                .neutralText ("ADD")
+//                .neutralColor (getResources ().getColor (R.color.accent))
+//                .positiveText ("REFRESH")
+//                .positiveColor (getResources ().getColor (R.color.accent))
+                .build ();
+        
+        rvDestinations = (RecyclerView) destinationDialog.getCustomView ().findViewById (R.id.rvDestinationList);
+        rlDestinationList = (RelativeLayout) destinationDialog.getCustomView ().findViewById (R.id.rlDestinationList);
+        llAddDestination = (LinearLayout) destinationDialog.getCustomView ().findViewById (R.id.llAddDestination);
+        progressBarDestination = (ProgressBar) destinationDialog.getCustomView ().findViewById (R.id.progressBarDestination);
+        
+        destinationDialog.getActionButton (DialogAction.NEUTRAL).setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                if (rlDestinationList.getVisibility () == View.VISIBLE) {
+                    destinationDialog.getActionButton (DialogAction.NEUTRAL).setText ("CANCEL");
+                    destinationDialog.getActionButton (DialogAction.POSITIVE).setText ("SAVE");
+                    rlDestinationList.setVisibility (View.GONE);
+                    llAddDestination.setVisibility (View.VISIBLE);
+                } else {
+                    destinationDialog.getActionButton (DialogAction.NEUTRAL).setText ("ADD");
+                    destinationDialog.getActionButton (DialogAction.POSITIVE).setText ("REFRESH");
+                    rlDestinationList.setVisibility (View.VISIBLE);
+                    llAddDestination.setVisibility (View.GONE);
+                }
+            }
+        });
+        
+        destinationAdapter.SetOnItemClickListener (new DestinationAdapter.OnItemClickListener () {
+            @Override
+            public void onItemClick (View view, int position) {
+                Destination destination = destinationList.get (position);
+                etDestination.setText (destination.getName ());
+                destination_id = destination.getId ();
+                etCompanyRate.setText ("" + destination.getRate ());
+                destinationDialog.dismiss ();
+            }
+        });
+        
+        rvDestinations.setAdapter (destinationAdapter);
+        rvDestinations.setHasFixedSize (true);
+        rvDestinations.setLayoutManager (new LinearLayoutManager (TruckEntryActivity.this, LinearLayoutManager.VERTICAL, false));
+        rvDestinations.setItemAnimator (new DefaultItemAnimator ());
+        
+        
+        partyAdapter = new PartyAdapter (TruckEntryActivity.this, partyList);
+        partyDialog = new MaterialDialog.Builder (TruckEntryActivity.this)
+                .customView (R.layout.dialog_party, true)
+//                .neutralText ("ADD")
+//                .neutralColor (getResources ().getColor (R.color.accent))
+//                .positiveText ("REFRESH")
+//                .positiveColor (getResources ().getColor (R.color.accent))
+                .build ();
+        
+        rvParty = (RecyclerView) partyDialog.getCustomView ().findViewById (R.id.rvPartyList);
+        rlPartyList = (RelativeLayout) partyDialog.getCustomView ().findViewById (R.id.rlPartyList);
+        llAddParty = (LinearLayout) partyDialog.getCustomView ().findViewById (R.id.llAddParty);
+        progressBarParty = (ProgressBar) partyDialog.getCustomView ().findViewById (R.id.progressBarParty);
+        
+        partyDialog.getActionButton (DialogAction.NEUTRAL).setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                if (rlPartyList.getVisibility () == View.VISIBLE) {
+                    partyDialog.getActionButton (DialogAction.NEUTRAL).setText ("CANCEL");
+                    partyDialog.getActionButton (DialogAction.POSITIVE).setText ("SAVE");
+                    rlPartyList.setVisibility (View.GONE);
+                    llAddParty.setVisibility (View.VISIBLE);
+                } else {
+                    partyDialog.getActionButton (DialogAction.NEUTRAL).setText ("ADD");
+                    partyDialog.getActionButton (DialogAction.POSITIVE).setText ("REFRESH");
+                    rlPartyList.setVisibility (View.VISIBLE);
+                    llAddParty.setVisibility (View.GONE);
+                }
+            }
+        });
+        
+        partyAdapter.SetOnItemClickListener (new PartyAdapter.OnItemClickListener () {
+            @Override
+            public void onItemClick (View view, int position) {
+                Party party = partyList.get (position);
+                etParty.setText (party.getName ());
+                party_id = party.getId ();
+                etDestination.setText ("");
+                destination_id = 0;
+                destinationList.clear ();
+                progressBarDestination.setVisibility (View.VISIBLE);
+                partyDialog.dismiss ();
+            }
+        });
+        
+        rvParty.setAdapter (partyAdapter);
+        rvParty.setHasFixedSize (true);
+        rvParty.setLayoutManager (new LinearLayoutManager (TruckEntryActivity.this, LinearLayoutManager.VERTICAL, false));
+        rvParty.setItemAnimator (new DefaultItemAnimator ());
     }
     
     private void initListener () {
@@ -203,13 +328,6 @@ public class TruckEntryActivity extends AppCompatActivity {
                     etDate.setError ("Please fill Date");
                     flag = false;
                 }
-                if (etNumberPlate1.getText ().toString ().length () == 0 ||
-                        etNumberPlate2.getText ().toString ().length () == 0 ||
-                        etNumberPlate3.getText ().toString ().length () == 0 ||
-                        etNumberPlate4.getText ().toString ().length () == 0) {
-                    etNumberPlate4.setError ("Please fill TruckNumber");
-                    flag = false;
-                }
                 if (etDestination.getText ().toString ().length () == 0) {
                     etDestination.setError ("Please fill Destination");
                     flag = false;
@@ -240,12 +358,11 @@ public class TruckEntryActivity extends AppCompatActivity {
                 }
     
                 if (flag) {
-                    String truckNumber = etNumberPlate1.getText ().toString () + " " + etNumberPlate2.getText ().toString () + " " + etNumberPlate3.getText ().toString () + " " + etNumberPlate4.getText ().toString ();
                     UpdateTruckEntryToServer (
                             etLrNo.getText ().toString (),
                             etWeight.getText ().toString (),
                             Utils.convertTimeFormat (etDate.getText ().toString (), "dd-MM-yyyy", "yyyy-MM-dd"),
-                            truckNumber,
+                            "MP12SA1234",
                             etDestination.getText ().toString (),
                             etOrderNo.getText ().toString (),
                             etInvoiceNo.getText ().toString (),
@@ -255,83 +372,23 @@ public class TruckEntryActivity extends AppCompatActivity {
                 }
             }
         });
-    
-        etNumberPlate1.addTextChangedListener (new TextWatcher () {
-            public void onTextChanged (CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (etNumberPlate1.getText ().toString ().length () == 2)     //size as per your requirement
-                {
-                    etNumberPlate2.requestFocus ();
-                }
-            }
         
-            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
-            
-            }
         
-            public void afterTextChanged (Editable s) {
-                // TODO Auto-generated method stub
-            }
-        });
-        etNumberPlate2.addTextChangedListener (new TextWatcher () {
-            public void onTextChanged (CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (etNumberPlate2.getText ().toString ().length () == 2)     //size as per your requirement
-                {
-                    etNumberPlate3.requestFocus ();
-                }
-            }
-    
-            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
-        
-            }
-    
-            public void afterTextChanged (Editable s) {
-                // TODO Auto-generated method stub
-            }
-        });
-        etNumberPlate3.addTextChangedListener (new TextWatcher () {
-            public void onTextChanged (CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (etNumberPlate3.getText ().toString ().length () == 3) {
-                    etNumberPlate4.requestFocus ();
-                }
-            }
-    
-            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
-        
-            }
-    
-            public void afterTextChanged (Editable s) {
-                // TODO Auto-generated method stub
-            }
-        });
-        etNumberPlate4.addTextChangedListener (new TextWatcher () {
-            public void onTextChanged (CharSequence s, int start, int before, int count) {
-                // TODO Auto-generated method stub
-                if (etNumberPlate4.getText ().toString ().length () == 4) {
-                    etDestination.requestFocus ();
-                }
-            }
-    
-            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
-                // TODO Auto-generated method stub
-        
-            }
-    
-            public void afterTextChanged (Editable s) {
-                // TODO Auto-generated method stub
-            }
-        });
-    
-    
         tvSelectDestination.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
-                getAllDestinations ();
+                if (party_id > 0) {
+                    destinationDialog.show ();
+                    getDestinationList ();
+                } else {
+                    Utils.showSnackBar (TruckEntryActivity.this, clMain, "Please select Party first", Snackbar.LENGTH_SHORT, "SELECT", new View.OnClickListener () {
+                        @Override
+                        public void onClick (View v) {
+                            partyDialog.show ();
+                            getPartyList ();
+                        }
+                    });
+                }
             }
         });
     
@@ -342,40 +399,127 @@ public class TruckEntryActivity extends AppCompatActivity {
                 getTruckList ();
             }
         });
+        tvSelectParty.setOnClickListener (new View.OnClickListener () {
+            @Override
+            public void onClick (View v) {
+                partyDialog.show ();
+                getPartyList ();
+            }
+        });
     }
     
+    private void getPartyList () {
+        if (NetworkConnection.isNetworkAvailable (TruckEntryActivity.this)) {
+//            partyList.clear ();
+//            partyAdapter.notifyDataSetChanged ();
+//            progressBarParty.setVisibility (View.VISIBLE);
+            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_GET_PARTIES, true);
+            StringRequest strRequest1 = new StringRequest (Request.Method.GET, AppConfigURL.URL_GET_PARTIES,
+                    new com.android.volley.Response.Listener<String> () {
+                        @Override
+                        public void onResponse (String response) {
+                            Utils.showLog (Log.INFO, AppConfigTags.SERVER_RESPONSE, response, true);
+                            if (response != null) {
+                                try {
+                                    JSONObject jsonObj = new JSONObject (response);
+                                    boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
+                                    String message = jsonObj.getString (AppConfigTags.MESSAGE);
+                                    if (! error) {
+                                        partyList.clear ();
+                                        JSONArray jsonArray = jsonObj.getJSONArray (AppConfigTags.PARTIES);
+                                        for (int i = 0; i < jsonArray.length (); i++) {
+                                            JSONObject jsonObject = jsonArray.getJSONObject (i);
+                                            partyList.add (new Party (
+                                                    jsonObject.getInt (AppConfigTags.PARTY_ID),
+                                                    jsonObject.getString (AppConfigTags.PARTY_NAME),
+                                                    jsonObject.getString (AppConfigTags.PARTY_ADDRESS)));
+                                        }
+                                        partyAdapter.notifyDataSetChanged ();
+                                        if (jsonArray.length () > 0) {
+                                            progressBarParty.setVisibility (View.GONE);
+                                        }
+                                        //    truckDialog.show ();
+                                    } else {
+                                        Utils.showSnackBar (TruckEntryActivity.this, clMain, message, Snackbar.LENGTH_LONG, null, null);
+                                    }
+                                } catch (Exception e) {
+                                    Utils.showSnackBar (TruckEntryActivity.this, clMain, getResources ().getString (R.string.snackbar_text_exception_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
+                                    e.printStackTrace ();
+                                }
+                            } else {
+                                Utils.showSnackBar (TruckEntryActivity.this, clMain, getResources ().getString (R.string.snackbar_text_error_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
+                                Utils.showLog (Log.WARN, AppConfigTags.SERVER_RESPONSE, AppConfigTags.DIDNT_RECEIVE_ANY_DATA_FROM_SERVER, true);
+                            }
+                        }
+                    },
+                    new com.android.volley.Response.ErrorListener () {
+                        @Override
+                        public void onErrorResponse (VolleyError error) {
+                            Utils.showLog (Log.ERROR, AppConfigTags.VOLLEY_ERROR, error.toString (), true);
+                            Utils.showSnackBar (TruckEntryActivity.this, clMain, getResources ().getString (R.string.snackbar_text_error_occurred), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_dismiss), null);
+                        }
+                    }) {
+                @Override
+                protected Map<String, String> getParams () throws AuthFailureError {
+                    Map<String, String> params = new Hashtable<String, String> ();
+                    Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
+                    return params;
+                }
+                
+                @Override
+                public Map<String, String> getHeaders () throws AuthFailureError {
+                    Map<String, String> params = new HashMap<> ();
+                    params.put (AppConfigTags.HEADER_API_KEY, Constants.api_key);
+                    params.put (AppConfigTags.HEADER_USER_LOGIN_KEY, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.USER_LOGIN_KEY));
+                    Utils.showLog (Log.INFO, AppConfigTags.HEADERS_SENT_TO_THE_SERVER, "" + params, false);
+                    return params;
+                }
+            };
+            Utils.sendRequest (strRequest1, 60);
+        } else {
+            Utils.showSnackBar (this, clMain, getResources ().getString (R.string.snackbar_text_no_internet_connection_available), Snackbar.LENGTH_LONG, getResources ().getString (R.string.snackbar_action_go_to_settings), new View.OnClickListener () {
+                @Override
+                public void onClick (View v) {
+                    Intent dialogIntent = new Intent (Settings.ACTION_SETTINGS);
+                    dialogIntent.addFlags (Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity (dialogIntent);
+                }
+            });
+        }
+    }
     
     private void getTruckList () {
         if (NetworkConnection.isNetworkAvailable (TruckEntryActivity.this)) {
+//            truckList.clear ();
+//            truckAdapter.notifyDataSetChanged ();
+//            progressBarTrucks.setVisibility (View.VISIBLE);
             Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_GET_TRUCK_DETAILS, true);
             StringRequest strRequest1 = new StringRequest (Request.Method.GET, AppConfigURL.URL_GET_TRUCK_DETAILS,
                     new com.android.volley.Response.Listener<String> () {
                         @Override
                         public void onResponse (String response) {
-                            truckDetailList.clear ();
                             Utils.showLog (Log.INFO, AppConfigTags.SERVER_RESPONSE, response, true);
                             if (response != null) {
                                 try {
-                                    
                                     JSONObject jsonObj = new JSONObject (response);
                                     boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
                                     String message = jsonObj.getString (AppConfigTags.MESSAGE);
                                     if (! error) {
+                                        truckList.clear ();
                                         JSONArray jsonArray = jsonObj.getJSONArray (AppConfigTags.TRUCKS);
                                         for (int i = 0; i < jsonArray.length (); i++) {
                                             JSONObject jsonObject = jsonArray.getJSONObject (i);
-                                            truckDetailList.add (new TruckDetail (
+                                            truckList.add (new Truck (
                                                     jsonObject.getInt (AppConfigTags.TRUCK_ID),
                                                     jsonObject.getString (AppConfigTags.TRUCK_NUMBER),
                                                     jsonObject.getString (AppConfigTags.TRUCK_OWNER_NAME),
                                                     jsonObject.getString (AppConfigTags.TRUCK_OWNER_MOBILE),
                                                     jsonObject.getString (AppConfigTags.TRUCK_OWNER_PAN_CARD)));
                                         }
-                                        truckDetailAdapter.notifyDataSetChanged ();
+                                        truckAdapter.notifyDataSetChanged ();
                                         if (jsonArray.length () > 0) {
                                             progressBarTrucks.setVisibility (View.GONE);
                                         }
-                                        
                                         //    truckDialog.show ();
                                     } else {
                                         Utils.showSnackBar (TruckEntryActivity.this, clMain, message, Snackbar.LENGTH_LONG, null, null);
@@ -430,10 +574,13 @@ public class TruckEntryActivity extends AppCompatActivity {
         }
     }
     
-    private void getAllDestinations () {
+    private void getDestinationList () {
         if (NetworkConnection.isNetworkAvailable (TruckEntryActivity.this)) {
-            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_GET_DESTINATION, true);
-            StringRequest strRequest1 = new StringRequest (Request.Method.GET, AppConfigURL.URL_GET_DESTINATION,
+//            destinationList.clear ();
+//            destinationAdapter.notifyDataSetChanged ();
+//            progressBarDestination.setVisibility (View.VISIBLE);
+            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_GET_DESTINATIONS, true);
+            StringRequest strRequest1 = new StringRequest (Request.Method.GET, AppConfigURL.URL_GET_DESTINATIONS,
                     new com.android.volley.Response.Listener<String> () {
                         @Override
                         public void onResponse (String response) {
@@ -444,16 +591,24 @@ public class TruckEntryActivity extends AppCompatActivity {
                                     boolean error = jsonObj.getBoolean (AppConfigTags.ERROR);
                                     String message = jsonObj.getString (AppConfigTags.MESSAGE);
                                     if (! error) {
-                                        ArrayList<Destination> destinationList = new ArrayList<> ();
+                                        destinationList.clear ();
                                         JSONArray jsonArray = jsonObj.getJSONArray (AppConfigTags.DESTINATIONS);
                                         JSONObject jsonObject;
                                         for (int i = 0; i < jsonArray.length (); i++) {
                                             jsonObject = jsonArray.getJSONObject (i);
-                                            destinationList.add (new Destination (
-                                                    jsonObject.getInt (AppConfigTags.DESTINATION_ID),
-                                                    jsonObject.getInt (AppConfigTags.DESTINATION_PARTY_ID),
-                                                    jsonObject.getString (AppConfigTags.DESTINATION_NAME),
-                                                    jsonObject.getString (AppConfigTags.DESTINATION_ADDRESS)));
+                                            if (jsonObject.getInt (AppConfigTags.DESTINATION_PARTY_ID) == party_id) {
+                                                destinationList.add (new Destination (
+                                                        jsonObject.getInt (AppConfigTags.DESTINATION_ID),
+                                                        jsonObject.getInt (AppConfigTags.DESTINATION_PARTY_ID),
+                                                        jsonObject.getString (AppConfigTags.DESTINATION_NAME),
+                                                        jsonObject.getString (AppConfigTags.DESTINATION_ADDRESS),
+                                                        jsonObject.getDouble (AppConfigTags.DESTINATION_RATE)));
+                                            }
+                                        }
+    
+                                        destinationAdapter.notifyDataSetChanged ();
+                                        if (jsonArray.length () > 0) {
+                                            progressBarDestination.setVisibility (View.GONE);
                                         }
                                         
                                     } else {

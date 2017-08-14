@@ -8,21 +8,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.actiknow.rokad.R;
-import com.actiknow.rokad.model.TruckDetail;
+import com.actiknow.rokad.model.Truck;
 import com.actiknow.rokad.utils.SetTypeFace;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class TruckDetailAdapter extends RecyclerView.Adapter<TruckDetailAdapter.ViewHolder> {
+public class TruckAdapter extends RecyclerView.Adapter<TruckAdapter.ViewHolder> {
     OnItemClickListener mItemClickListener;
     private Activity activity;
-    private List<TruckDetail> truckDetailList = new ArrayList<TruckDetail> ();
+    private List<Truck> truckList = new ArrayList<Truck> ();
     
-    public TruckDetailAdapter (Activity activity, List<TruckDetail> truckDetailList) {
+    public TruckAdapter (Activity activity, List<Truck> truckList) {
         this.activity = activity;
-        this.truckDetailList = truckDetailList;
+        this.truckList = truckList;
     }
     
     @Override
@@ -34,20 +34,20 @@ public class TruckDetailAdapter extends RecyclerView.Adapter<TruckDetailAdapter.
     
     @Override
     public void onBindViewHolder (ViewHolder holder, int position) {//        runEnterAnimation (holder.itemView);
-        final TruckDetail truckDetail = truckDetailList.get (position);
+        final Truck truck = truckList.get (position);
         
         holder.tvTruckNumber.setTypeface (SetTypeFace.getTypeface (activity));
         holder.tvOwnerName.setTypeface (SetTypeFace.getTypeface (activity));
         holder.tvOwnerMobile.setTypeface (SetTypeFace.getTypeface (activity));
         
-        holder.tvTruckNumber.setText (truckDetail.getTruck_number ());
-        holder.tvOwnerName.setText (truckDetail.getOwner_name ());
-        holder.tvOwnerMobile.setText (truckDetail.getOwner_mobile ());
+        holder.tvTruckNumber.setText (truck.getTruck_number ());
+        holder.tvOwnerName.setText (truck.getOwner_name ());
+        holder.tvOwnerMobile.setText (truck.getOwner_mobile ());
     }
     
     @Override
     public int getItemCount () {
-        return truckDetailList.size ();
+        return truckList.size ();
     }
     
     public void SetOnItemClickListener (final OnItemClickListener mItemClickListener) {
@@ -74,7 +74,7 @@ public class TruckDetailAdapter extends RecyclerView.Adapter<TruckDetailAdapter.
         @Override
         public void onClick (View v) {
             mItemClickListener.onItemClick (v, getLayoutPosition ());
-//            TruckDetail truckDetail = truckDetailList.get (getLayoutPosition ());
+//            Truck truckDetail = truckList.get (getLayoutPosition ());
         }
     }
 }

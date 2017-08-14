@@ -10,7 +10,8 @@ public class AppConfigURL {
     public static String URL_TRUCK_ENTRY = BASE_URL + "truck_entry";
     public static String URL_INIT = BASE_URL + "init/application";
     
-    public static String URL_GET_DESTINATION = BASE_URL + "destination";
+    public static String URL_GET_DESTINATIONS = BASE_URL + "destination";
     public static String URL_GET_TRUCK_DETAILS = BASE_URL + "truck_detail";
+    public static String URL_GET_PARTIES = BASE_URL + "party";
     
 }

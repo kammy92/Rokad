@@ -35,6 +35,7 @@ public class AppConfigTags {
     public static final String DESTINATION_PARTY_ID = "destination_party_id";
     public static final String DESTINATION_NAME = "destination_name";
     public static final String DESTINATION_ADDRESS = "destination_address";
+    public static final String DESTINATION_RATE = "destination_rate";
     public static String LR_NUMBER = "lr_number";
     public static String WEIGHT = "weight";
     public static String DATE = "date";
@@ -42,8 +43,6 @@ public class AppConfigTags {
     public static String DESTINATION = "destination";
     public static String ORDER_NUMBER = "order_number";
     public static String INVOICE_NUMBER = "invoice_number";
-    public static String PARTY_ID = "party_id";
-    public static String PARTY_NAME = "party_name";
     public static String COMPANY_ID = "company_id";
     public static String COMPANY_NAME = "company_name";
     public static String CASH_ADVANCE = "cash_advance";
@@ -68,6 +67,10 @@ public class AppConfigTags {
     public static String TRUCK_OWNER_NAME = "truck_owner_name";
     public static String TRUCK_OWNER_MOBILE = "truck_owner_mobile";
     public static String TRUCK_OWNER_PAN_CARD = "truck_owner_pan_card";
+    
+    public static String PARTY_ID = "party_id";
+    public static String PARTY_NAME = "party_name";
+    public static String PARTY_ADDRESS = "party_address";
     
     
 }

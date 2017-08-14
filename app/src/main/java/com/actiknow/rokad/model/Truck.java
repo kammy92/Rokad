@@ -1,10 +1,10 @@
 package com.actiknow.rokad.model;
 
-public class TruckDetail {
+public class Truck {
     int id;
     String truck_number, owner_name, owner_mobile, owner_pan_card;
     
-    public TruckDetail (int id, String truck_number, String owner_name, String owner_mobile, String owner_pan_card) {
+    public Truck (int id, String truck_number, String owner_name, String owner_mobile, String owner_pan_card) {
         this.id = id;
         this.truck_number = truck_number;
         this.owner_name = owner_name;
