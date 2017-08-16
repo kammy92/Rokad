@@ -23,6 +23,7 @@
     <color name="text_color_grey_dark">#858585</color>
     <color name="text_color_grey_dark2">#4b4b4b</color>
     <color name="text_color_blue">#311b92</color>
+    <color name="red">#d50000</color>
 
     <color name="progress_dialog_background_color">#ffffff</color>
 

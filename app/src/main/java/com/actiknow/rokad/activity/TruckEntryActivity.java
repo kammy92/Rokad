@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
@@ -58,14 +60,18 @@ public class TruckEntryActivity extends AppCompatActivity {
     final List<Truck> truckList = new ArrayList<> ();
     final List<Destination> destinationList = new ArrayList<> ();
     final List<Party> partyList = new ArrayList<> ();
-    ProgressDialog progressDialog;
+    
+    EditText etPartyName;
+    TextView tvSelectParty;
     EditText etLrNo;
     EditText etWeight;
     EditText etDate;
+    EditText etTruckNumber;
+    TextView tvSelectTruckNumber;
     EditText etDestination;
+    TextView tvSelectDestination;
     EditText etOrderNo;
     EditText etInvoiceNo;
-    EditText etParty;
     EditText etCashAdvance;
     EditText etDieselAdvance;
     EditText etBillRate;
@@ -77,11 +83,7 @@ public class TruckEntryActivity extends AppCompatActivity {
     CoordinatorLayout clMain;
     TextView tvSubmit;
     UserDetailsPref userDetailsPref;
-    EditText etTruckNumber;
     RelativeLayout rlBack;
-    TextView tvSelectDestination;
-    TextView tvSelectTruckNumber;
-    TextView tvSelectParty;
     
     TruckAdapter truckAdapter;
     MaterialDialog truckDialog;
@@ -108,6 +110,7 @@ public class TruckEntryActivity extends AppCompatActivity {
     int destination_id = 0;
     int truck_id = 0;
     
+    ProgressDialog progressDialog;
     
     @Override
     protected void onCreate (Bundle savedInstanceState) {
@@ -126,7 +129,7 @@ public class TruckEntryActivity extends AppCompatActivity {
         etDestination = (EditText) findViewById (R.id.etDestination);
         etOrderNo = (EditText) findViewById (R.id.etOrderNo);
         etInvoiceNo = (EditText) findViewById (R.id.etInvoiceNo);
-        etParty = (EditText) findViewById (R.id.etParty);
+        etPartyName = (EditText) findViewById (R.id.etParty);
         etCashAdvance = (EditText) findViewById (R.id.etCashAdvance);
         etDieselAdvance = (EditText) findViewById (R.id.etDieselAdvance);
         etBillRate = (EditText) findViewById (R.id.etBillRate);
@@ -147,7 +150,7 @@ public class TruckEntryActivity extends AppCompatActivity {
     public void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         progressDialog = new ProgressDialog (this);
-//        etParty.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_NAME));
+//        etPartyName.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_NAME));
     }
     
     private void initDialogs () {
@@ -187,6 +190,7 @@ public class TruckEntryActivity extends AppCompatActivity {
             public void onItemClick (View view, int position) {
                 Truck truck = truckList.get (position);
                 etTruckNumber.setText (truck.getTruck_number ());
+                truck_id = truck.getId ();
                 truckDialog.dismiss ();
             }
         });
@@ -234,7 +238,7 @@ public class TruckEntryActivity extends AppCompatActivity {
                 Destination destination = destinationList.get (position);
                 etDestination.setText (destination.getName ());
                 destination_id = destination.getId ();
-                etCompanyRate.setText ("" + destination.getRate ());
+                etCompanyRate.setText (String.valueOf (destination.getRate () * Double.parseDouble (etWeight.getText ().toString ())));
                 destinationDialog.dismiss ();
             }
         });
@@ -280,7 +284,7 @@ public class TruckEntryActivity extends AppCompatActivity {
             @Override
             public void onItemClick (View view, int position) {
                 Party party = partyList.get (position);
-                etParty.setText (party.getName ());
+                etPartyName.setText (party.getName ());
                 party_id = party.getId ();
                 etDestination.setText ("");
                 destination_id = 0;
@@ -340,8 +344,8 @@ public class TruckEntryActivity extends AppCompatActivity {
                     etInvoiceNo.setError ("Please fill Invoice Number");
                     flag = false;
                 }
-                if (etParty.getText ().toString ().length () == 0) {
-                    etParty.setError ("Please fill Party Name");
+                if (etPartyName.getText ().toString ().length () == 0) {
+                    etPartyName.setError ("Please fill Party Name");
                     flag = false;
                 }
                 if (etCashAdvance.getText ().toString ().length () == 0) {
@@ -377,15 +381,22 @@ public class TruckEntryActivity extends AppCompatActivity {
         tvSelectDestination.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
-                if (party_id > 0) {
+                if (party_id > 0 && etWeight.getText ().toString ().length () > 0) {
                     destinationDialog.show ();
                     getDestinationList ();
-                } else {
+                } else if (party_id == 0) {
                     Utils.showSnackBar (TruckEntryActivity.this, clMain, "Please select Party first", Snackbar.LENGTH_SHORT, "SELECT", new View.OnClickListener () {
                         @Override
                         public void onClick (View v) {
                             partyDialog.show ();
                             getPartyList ();
+                        }
+                    });
+                } else if (etWeight.getText ().toString ().length () == 0) {
+                    Utils.showSnackBar (TruckEntryActivity.this, clMain, "Please enter weight first", Snackbar.LENGTH_SHORT, "ENTER", new View.OnClickListener () {
+                        @Override
+                        public void onClick (View v) {
+                            etWeight.requestFocus ();
                         }
                     });
                 }
@@ -404,6 +415,83 @@ public class TruckEntryActivity extends AppCompatActivity {
             public void onClick (View v) {
                 partyDialog.show ();
                 getPartyList ();
+            }
+        });
+    
+    
+        etCashAdvance.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (s.length () > 0 && etDieselAdvance.getText ().toString ().length () > 0) {
+                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (s.toString ()) + Double.parseDouble (etDieselAdvance.getText ().toString ())));
+                } else if (s.length () == 0 && etDieselAdvance.getText ().toString ().length () > 0) {
+                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (etDieselAdvance.getText ().toString ())));
+                } else if (etDieselAdvance.getText ().toString ().length () == 0 && s.length () > 0) {
+                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (s.toString ())));
+                } else {
+                    etTotalAdvance.setText ("0");
+                }
+            }
+        
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+        
+            @Override
+            public void afterTextChanged (Editable s) {
+            
+            }
+        });
+        etDieselAdvance.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+                if (s.length () > 0 && etCashAdvance.getText ().toString ().length () > 0) {
+                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (etCashAdvance.getText ().toString ()) + Double.parseDouble (s.toString ())));
+                } else if (s.length () == 0 && etCashAdvance.getText ().toString ().length () > 0) {
+                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (etCashAdvance.getText ().toString ())));
+                } else if (etCashAdvance.getText ().toString ().length () == 0 && s.length () > 0) {
+                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (s.toString ())));
+                } else {
+                    etTotalAdvance.setText ("0");
+                }
+            }
+        
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+        
+            @Override
+            public void afterTextChanged (Editable s) {
+            }
+        });
+    
+        etBillRate.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+            
+            }
+        
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+        
+            @Override
+            public void afterTextChanged (Editable s) {
+            }
+        });
+    
+        etWeight.addTextChangedListener (new TextWatcher () {
+            @Override
+            public void onTextChanged (CharSequence s, int start, int before, int count) {
+            
+            }
+        
+            @Override
+            public void beforeTextChanged (CharSequence s, int start, int count, int after) {
+            }
+        
+            @Override
+            public void afterTextChanged (Editable s) {
             }
         });
     }

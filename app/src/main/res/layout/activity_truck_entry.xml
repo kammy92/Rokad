@@ -140,7 +140,6 @@
                         android:enabled="false"
                         android:textSize="@dimen/text_size_medium"/>
                 </RelativeLayout>
-
                 <TextView
                     android:id="@+id/tvLrNo"
                     android:layout_width="match_parent"
@@ -180,7 +179,7 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textSize="@dimen/text_size_medium"/>
                 <TextView
                     android:id="@+id/tvDate"
@@ -239,8 +238,8 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/tvTruckNo"
+                        android:layout_marginEnd="@dimen/activity_margin"
                         android:layout_marginRight="@dimen/activity_margin"
-
                         android:layout_toLeftOf="@+id/tvSelectTruckNumber"
                         android:layout_toStartOf="@+id/tvSelectTruckNumber"
                         android:background="@drawable/edittext_underline"
@@ -279,7 +278,6 @@
                         android:text="@string/activity_truck_number_select"
                         android:textColor="@color/text_color_white"
                         android:textSize="@dimen/text_size_extra_small"/>
-
                     <EditText
                         android:id="@+id/etDestination"
                         android:layout_width="match_parent"
@@ -394,7 +392,7 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textSize="@dimen/text_size_medium"/>
                 <TextView
                     android:id="@+id/tvDieselAdvance"
@@ -414,7 +412,7 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textSize="@dimen/text_size_medium"/>
                 <TextView
                     android:id="@+id/tvTotalAdvance"
@@ -479,7 +477,6 @@
                     android:textSize="@dimen/text_size_medium"/>
             </LinearLayout>
         </ScrollView>
-
         <TextView
             android:id="@+id/tvSubmit"
             android:layout_width="match_parent"

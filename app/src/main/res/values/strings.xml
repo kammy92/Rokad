@@ -10,17 +10,39 @@
     <string name="activity_main_receiving">Receiving/रिसीविंग</string>
     <string name="activity_main_rokad">Rokad/रोकड़</string>
 
-    <string name="activity_lr_no">LR Number/एलआर नंबर</string>
-    <string name="activity_weight">Weight/वजन</string>
-    <string name="activity_date">Date/तारीख</string>
-    <string name="activity_truck_no">Truck No./ट्रक नंबर</string>
-    <string name="activity_destination">Destination/स्थान</string>
-    <string name="activity_delivery_no">Delivery No./डिलीवरी नंबर</string>
-    <string name="activity_invoice_no">Invoice No./इनवॉइस नंबर</string>
-    <string name="activity_party">Party Name/पार्टी का नाम</string>
-    <string name="activity_cash_advance">Cash Advance/कैश एडवांस</string>
-    <string name="activity_diesel_advance">Diesel Advance/डीजल एडवांस</string>
-    <string name="activity_bill_rate">Bill Rate/बिल रेट</string>
+    <string name="activity_lr_no">LR Number/एलआर नंबर
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_weight">Weight/वजन
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_date">Date/तारीख
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_truck_no">Truck No./ट्रक नंबर
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_destination">Destination/स्थान
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_delivery_no">Delivery No./डिलीवरी नंबर
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_invoice_no">Invoice No./इनवॉइस नंबर
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_party">Party Name/पार्टी का नाम
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_cash_advance">Cash Advance/कैश एडवांस
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_diesel_advance">Diesel Advance/डीजल एडवांस
+        <font color='red'>*</font>
+    </string>
+    <string name="activity_bill_rate">Bill Rate/बिल रेट
+        <font color='red'>*</font>
+    </string>
 
     <string name="activity_total_company_billing">Total Company Billing/टोटल कंपनी बिलिंग</string>
 
