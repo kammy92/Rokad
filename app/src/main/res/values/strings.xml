@@ -48,7 +48,7 @@
 
 
     <string name="activity_office">Office/ऑफिस</string>
-    <string name="activity_total_bhada">Total Bhada/टोटल भड़ा</string>
+    <string name="activity_total_bhada">Total Bhada/टोटल भाड़ा</string>
     <string name="activity_total_advance">Total Advance/टोटल एडवांस</string>
     <string name="activity_shortage">Shortage/शोर्टैज</string>
     <string name="activity_commission">Commission/कमीशन</string>
@@ -111,7 +111,7 @@
     <string name="activity_truck_owner_name">Owner Name</string>
     <string name="activity_truck_owner_number">Owner Number</string>
     <string name="activity_pan_number">PAN Number</string>
-    <string name="activity_company_rate">Company Rate/कंपनी दर</string>
+    <string name="activity_company_rate">Company Rate/कंपनी रेट</string>
     <string name="activity_truck_number_select">SELECT</string>
 
     <string name="activity_truck_destination_name">Destination</string>

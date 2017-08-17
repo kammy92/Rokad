@@ -12,6 +12,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
@@ -49,7 +51,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -76,8 +81,11 @@ public class TruckEntryActivity extends AppCompatActivity {
     EditText etDieselAdvance;
     EditText etBillRate;
     EditText etCompanyRate;
+    TextView tvTotalAdvance;
     EditText etTotalAdvance;
+    TextView tvTotalCompanyBilling;
     EditText etTotalCompanyBilling;
+    TextView tvTotalBhada;
     EditText etTotalBhada;
     
     CoordinatorLayout clMain;
@@ -110,6 +118,7 @@ public class TruckEntryActivity extends AppCompatActivity {
     int destination_id = 0;
     int truck_id = 0;
     
+    
     ProgressDialog progressDialog;
     
     @Override
@@ -132,15 +141,19 @@ public class TruckEntryActivity extends AppCompatActivity {
         etPartyName = (EditText) findViewById (R.id.etParty);
         etCashAdvance = (EditText) findViewById (R.id.etCashAdvance);
         etDieselAdvance = (EditText) findViewById (R.id.etDieselAdvance);
-        etBillRate = (EditText) findViewById (R.id.etBillRate);
-        etCompanyRate = (EditText) findViewById (R.id.etCompanyRate);
+        tvTotalAdvance = (TextView) findViewById (R.id.tvTotalAdvance);
         etTotalAdvance = (EditText) findViewById (R.id.etTotalAdvance);
+        etBillRate = (EditText) findViewById (R.id.etBillRate);
+        tvTotalCompanyBilling = (TextView) findViewById (R.id.tvTotalCompanyBilling);
+        etCompanyRate = (EditText) findViewById (R.id.etCompanyRate);
         etTotalCompanyBilling = (EditText) findViewById (R.id.etTotalCompanyBilling);
+        tvTotalBhada = (TextView) findViewById (R.id.tvTotalBhada);
         etTotalBhada = (EditText) findViewById (R.id.etTotalBhada);
         etTruckNumber = (EditText) findViewById (R.id.etTruckNumber);
         tvSubmit = (TextView) findViewById (R.id.tvSubmit);
         clMain = (CoordinatorLayout) findViewById (R.id.clMain);
         rlBack = (RelativeLayout) findViewById (R.id.rlBack);
+    
     
         tvSelectTruckNumber = (TextView) findViewById (R.id.tvSelectTruckNumber);
         tvSelectDestination = (TextView) findViewById (R.id.tvSelectDestination);
@@ -150,6 +163,8 @@ public class TruckEntryActivity extends AppCompatActivity {
     public void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         progressDialog = new ProgressDialog (this);
+        etCashAdvance.setFilters (new InputFilter[] {new DecimalDigitsInputFilter (10, 2)});
+        etDieselAdvance.setFilters (new InputFilter[] {new DecimalDigitsInputFilter (10, 2)});
 //        etPartyName.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_NAME));
     }
     
@@ -238,7 +253,9 @@ public class TruckEntryActivity extends AppCompatActivity {
                 Destination destination = destinationList.get (position);
                 etDestination.setText (destination.getName ());
                 destination_id = destination.getId ();
-                etCompanyRate.setText (String.valueOf (destination.getRate () * Double.parseDouble (etWeight.getText ().toString ())));
+                etCompanyRate.setText (String.format (Locale.ENGLISH, "%.2f", destination.getRate ()));
+                etTotalCompanyBilling.setText (String.format (Locale.ENGLISH, "%.2f", (destination.getRate () * Double.parseDouble (etWeight.getText ().toString ()))));
+                tvTotalCompanyBilling.setText (getResources ().getString (R.string.activity_total_company_billing) + " (" + etWeight.getText ().toString () + " * " + String.format ("%.2f", destination.getRate ()) + ")");
                 destinationDialog.dismiss ();
             }
         });
@@ -377,7 +394,6 @@ public class TruckEntryActivity extends AppCompatActivity {
             }
         });
         
-        
         tvSelectDestination.setOnClickListener (new View.OnClickListener () {
             @Override
             public void onClick (View v) {
@@ -418,18 +434,21 @@ public class TruckEntryActivity extends AppCompatActivity {
             }
         });
     
-    
         etCashAdvance.addTextChangedListener (new TextWatcher () {
             @Override
             public void onTextChanged (CharSequence s, int start, int before, int count) {
                 if (s.length () > 0 && etDieselAdvance.getText ().toString ().length () > 0) {
-                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (s.toString ()) + Double.parseDouble (etDieselAdvance.getText ().toString ())));
+                    etTotalAdvance.setText (String.format (Locale.ENGLISH, "%.2f", (Double.parseDouble (s.toString ()) + Double.parseDouble (etDieselAdvance.getText ().toString ()))));
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance) + " (" + s.toString () + " + " + etDieselAdvance.getText ().toString () + ")");
                 } else if (s.length () == 0 && etDieselAdvance.getText ().toString ().length () > 0) {
-                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (etDieselAdvance.getText ().toString ())));
+                    etTotalAdvance.setText (String.format (Locale.ENGLISH, "%.2f", Double.parseDouble (etDieselAdvance.getText ().toString ())));
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance) + " (0 + " + etDieselAdvance.getText ().toString () + ")");
                 } else if (etDieselAdvance.getText ().toString ().length () == 0 && s.length () > 0) {
-                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (s.toString ())));
+                    etTotalAdvance.setText (String.format (Locale.ENGLISH, "%.2f", Double.parseDouble (s.toString ())));
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance) + " (" + s.toString () + " + 0)");
                 } else {
-                    etTotalAdvance.setText ("0");
+                    etTotalAdvance.setText ("");
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance));
                 }
             }
         
@@ -446,20 +465,24 @@ public class TruckEntryActivity extends AppCompatActivity {
             @Override
             public void onTextChanged (CharSequence s, int start, int before, int count) {
                 if (s.length () > 0 && etCashAdvance.getText ().toString ().length () > 0) {
-                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (etCashAdvance.getText ().toString ()) + Double.parseDouble (s.toString ())));
+                    etTotalAdvance.setText (String.format (Locale.ENGLISH, "%.2f", (Double.parseDouble (etCashAdvance.getText ().toString ()) + Double.parseDouble (s.toString ()))));
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance) + " (" + etCashAdvance.getText ().toString () + " + " + s.toString () + ")");
                 } else if (s.length () == 0 && etCashAdvance.getText ().toString ().length () > 0) {
-                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (etCashAdvance.getText ().toString ())));
+                    etTotalAdvance.setText (String.format (Locale.ENGLISH, "%.2f", Double.parseDouble (etCashAdvance.getText ().toString ())));
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance) + " (" + etCashAdvance.getText ().toString () + " + 0)");
                 } else if (etCashAdvance.getText ().toString ().length () == 0 && s.length () > 0) {
-                    etTotalAdvance.setText (String.valueOf (Double.parseDouble (s.toString ())));
+                    etTotalAdvance.setText (String.format (Locale.ENGLISH, "%.2f", Double.parseDouble (s.toString ())));
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance) + " (0 + " + s.toString () + ")");
                 } else {
-                    etTotalAdvance.setText ("0");
+                    etTotalAdvance.setText ("");
+                    tvTotalAdvance.setText (getResources ().getString (R.string.activity_total_advance));
                 }
             }
-        
+    
             @Override
             public void beforeTextChanged (CharSequence s, int start, int count, int after) {
             }
-        
+    
             @Override
             public void afterTextChanged (Editable s) {
             }
@@ -468,7 +491,13 @@ public class TruckEntryActivity extends AppCompatActivity {
         etBillRate.addTextChangedListener (new TextWatcher () {
             @Override
             public void onTextChanged (CharSequence s, int start, int before, int count) {
-            
+                if (s.length () > 0 && etWeight.getText ().toString ().length () > 0) {
+                    etTotalBhada.setText (String.format (Locale.ENGLISH, "%.2f", (Double.parseDouble (s.toString ()) * Double.parseDouble (etWeight.getText ().toString ()))));
+                    tvTotalBhada.setText (getResources ().getString (R.string.activity_total_bhada) + " (" + etWeight.getText ().toString () + " * " + s.toString () + ")");
+                } else {
+                    etTotalBhada.setText ("");
+                    tvTotalBhada.setText (getResources ().getString (R.string.activity_total_bhada));
+                }
             }
         
             @Override
@@ -483,7 +512,23 @@ public class TruckEntryActivity extends AppCompatActivity {
         etWeight.addTextChangedListener (new TextWatcher () {
             @Override
             public void onTextChanged (CharSequence s, int start, int before, int count) {
-            
+                if (s.length () > 0) {
+                    for (int i = 0; i < destinationList.size (); i++) {
+                        if (destinationList.get (i).getId () == destination_id) {
+                            etTotalCompanyBilling.setText (String.format (Locale.ENGLISH, "%.2f", (destinationList.get (i).getRate () * Double.parseDouble (etWeight.getText ().toString ()))));
+                            tvTotalCompanyBilling.setText (getResources ().getString (R.string.activity_total_company_billing) + " (" + etWeight.getText ().toString () + " * " + destinationList.get (i).getRate () + ")");
+                        }
+                    }
+                    if (etBillRate.getText ().toString ().length () > 0) {
+                        etTotalBhada.setText (String.format (Locale.ENGLISH, "%.2f", (Double.parseDouble (etBillRate.getText ().toString ()) * Double.parseDouble (s.toString ()))));
+                        tvTotalBhada.setText (getResources ().getString (R.string.activity_total_bhada) + " (" + s.toString () + " * " + String.format (Locale.ENGLISH, "%.2f", Double.parseDouble (etBillRate.getText ().toString ())) + ")");
+                    }
+                } else {
+                    etTotalBhada.setText ("");
+                    tvTotalBhada.setText (getResources ().getString (R.string.activity_total_bhada));
+                    etTotalCompanyBilling.setText ("");
+                    tvTotalCompanyBilling.setText (getResources ().getString (R.string.activity_total_company_billing));
+                }
             }
         
             @Override
@@ -845,5 +890,24 @@ public class TruckEntryActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+    
+    public class DecimalDigitsInputFilter implements InputFilter {
+        
+        Pattern mPattern;
+        
+        public DecimalDigitsInputFilter (int digitsBeforeZero, int digitsAfterZero) {
+            mPattern = Pattern.compile ("[0-9]{0," + (digitsBeforeZero - 1) + "}+((\\.[0-9]{0," + (digitsAfterZero - 1) + "})?)||(\\.)?");
+        }
+        
+        @Override
+        public CharSequence filter (CharSequence source, int start, int end, Spanned dest, int dstart, int dend) {
+            
+            Matcher matcher = mPattern.matcher (dest);
+            if (! matcher.matches ())
+                return "";
+            return null;
+        }
+        
     }
 }

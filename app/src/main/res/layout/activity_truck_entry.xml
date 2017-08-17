@@ -312,7 +312,7 @@
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
                     android:enabled="false"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textSize="@dimen/text_size_medium"/>
                 <TextView
                     android:id="@+id/tvBillRate"
@@ -332,7 +332,7 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
-                    android:inputType="number"
+                    android:inputType="numberDecimal"
                     android:textSize="@dimen/text_size_medium"/>
                 <TextView
                     android:id="@+id/tvDeliveryNo"
@@ -453,6 +453,7 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
+                    android:enabled="false"
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium"/>
                 <TextView
@@ -473,6 +474,7 @@
                     android:layout_marginLeft="@dimen/activity_margin"
                     android:layout_marginRight="@dimen/activity_margin"
                     android:background="@drawable/edittext_underline"
+                    android:enabled="false"
                     android:inputType="number"
                     android:textSize="@dimen/text_size_medium"/>
             </LinearLayout>
