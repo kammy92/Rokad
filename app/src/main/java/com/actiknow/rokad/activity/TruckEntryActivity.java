@@ -75,12 +75,12 @@ public class TruckEntryActivity extends AppCompatActivity {
     TextView tvSelectTruckNumber;
     EditText etDestination;
     TextView tvSelectDestination;
-    EditText etOrderNo;
+    EditText etCompanyRate;
+    EditText etBillRate;
+    EditText etDeliveryNo;
     EditText etInvoiceNo;
     EditText etCashAdvance;
     EditText etDieselAdvance;
-    EditText etBillRate;
-    EditText etCompanyRate;
     TextView tvTotalAdvance;
     EditText etTotalAdvance;
     TextView tvTotalCompanyBilling;
@@ -136,7 +136,7 @@ public class TruckEntryActivity extends AppCompatActivity {
         etWeight = (EditText) findViewById (R.id.etWeight);
         etDate = (EditText) findViewById (R.id.etDate);
         etDestination = (EditText) findViewById (R.id.etDestination);
-        etOrderNo = (EditText) findViewById (R.id.etOrderNo);
+        etDeliveryNo = (EditText) findViewById (R.id.etOrderNo);
         etInvoiceNo = (EditText) findViewById (R.id.etInvoiceNo);
         etPartyName = (EditText) findViewById (R.id.etParty);
         etCashAdvance = (EditText) findViewById (R.id.etCashAdvance);
@@ -163,6 +163,8 @@ public class TruckEntryActivity extends AppCompatActivity {
     public void initData () {
         userDetailsPref = UserDetailsPref.getInstance ();
         progressDialog = new ProgressDialog (this);
+        etBillRate.setFilters (new InputFilter[] {new DecimalDigitsInputFilter (10, 2)});
+        etWeight.setFilters (new InputFilter[] {new DecimalDigitsInputFilter (10, 2)});
         etCashAdvance.setFilters (new InputFilter[] {new DecimalDigitsInputFilter (10, 2)});
         etDieselAdvance.setFilters (new InputFilter[] {new DecimalDigitsInputFilter (10, 2)});
 //        etPartyName.setText (userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_NAME));
@@ -206,6 +208,7 @@ public class TruckEntryActivity extends AppCompatActivity {
                 Truck truck = truckList.get (position);
                 etTruckNumber.setText (truck.getTruck_number ());
                 truck_id = truck.getId ();
+                etTruckNumber.setError (null);
                 truckDialog.dismiss ();
             }
         });
@@ -253,6 +256,7 @@ public class TruckEntryActivity extends AppCompatActivity {
                 Destination destination = destinationList.get (position);
                 etDestination.setText (destination.getName ());
                 destination_id = destination.getId ();
+                etDestination.setError (null);
                 etCompanyRate.setText (String.format (Locale.ENGLISH, "%.2f", destination.getRate ()));
                 etTotalCompanyBilling.setText (String.format (Locale.ENGLISH, "%.2f", (destination.getRate () * Double.parseDouble (etWeight.getText ().toString ()))));
                 tvTotalCompanyBilling.setText (getResources ().getString (R.string.activity_total_company_billing) + " (" + etWeight.getText ().toString () + " * " + String.format ("%.2f", destination.getRate ()) + ")");
@@ -306,6 +310,8 @@ public class TruckEntryActivity extends AppCompatActivity {
                 etDestination.setText ("");
                 destination_id = 0;
                 destinationList.clear ();
+                etPartyName.setError (null);
+                etDestination.setError (null);
                 progressBarDestination.setVisibility (View.VISIBLE);
                 partyDialog.dismiss ();
             }
@@ -330,6 +336,7 @@ public class TruckEntryActivity extends AppCompatActivity {
             @Override
             public void onClick (View view) {
                 Utils.pickupDate (TruckEntryActivity.this, etDate);
+                etDate.setError (null);
             }
         });
     
@@ -337,6 +344,10 @@ public class TruckEntryActivity extends AppCompatActivity {
             @Override
             public void onClick (View view) {
                 boolean flag = true;
+                if (party_id == 0) {
+                    etPartyName.setError ("Please select Party");
+                    flag = false;
+                }
                 if (etLrNo.getText ().toString ().length () == 0) {
                     etLrNo.setError ("Please fill LR Number");
                     flag = false;
@@ -349,20 +360,24 @@ public class TruckEntryActivity extends AppCompatActivity {
                     etDate.setError ("Please fill Date");
                     flag = false;
                 }
-                if (etDestination.getText ().toString ().length () == 0) {
-                    etDestination.setError ("Please fill Destination");
+                if (truck_id == 0) {
+                    etTruckNumber.setError ("Please select Truck");
                     flag = false;
                 }
-                if (etOrderNo.getText ().toString ().length () == 0) {
-                    etOrderNo.setError ("Please fill Order Number");
+                if (destination_id == 0) {
+                    etDestination.setError ("Please select Destination");
+                    flag = false;
+                }
+                if (etBillRate.getText ().toString ().length () == 0) {
+                    etBillRate.setError ("Please fill Bill Rate");
+                    flag = false;
+                }
+                if (etDeliveryNo.getText ().toString ().length () == 0) {
+                    etDeliveryNo.setError ("Please fill Delivery Number");
                     flag = false;
                 }
                 if (etInvoiceNo.getText ().toString ().length () == 0) {
                     etInvoiceNo.setError ("Please fill Invoice Number");
-                    flag = false;
-                }
-                if (etPartyName.getText ().toString ().length () == 0) {
-                    etPartyName.setError ("Please fill Party Name");
                     flag = false;
                 }
                 if (etCashAdvance.getText ().toString ().length () == 0) {
@@ -373,23 +388,25 @@ public class TruckEntryActivity extends AppCompatActivity {
                     etDieselAdvance.setError ("Please fill Diesel Advance");
                     flag = false;
                 }
-                if (etBillRate.getText ().toString ().length () == 0) {
-                    etBillRate.setError ("Please fill Bill Rate");
-                    flag = false;
-                }
     
                 if (flag) {
                     UpdateTruckEntryToServer (
+                            String.valueOf (party_id),
                             etLrNo.getText ().toString (),
                             etWeight.getText ().toString (),
                             Utils.convertTimeFormat (etDate.getText ().toString (), "dd-MM-yyyy", "yyyy-MM-dd"),
-                            "MP12SA1234",
-                            etDestination.getText ().toString (),
-                            etOrderNo.getText ().toString (),
+                            String.valueOf (truck_id),
+                            String.valueOf (destination_id),
+                            etCompanyRate.getText ().toString (),
+                            etBillRate.getText ().toString (),
+                            etDeliveryNo.getText ().toString (),
                             etInvoiceNo.getText ().toString (),
                             etCashAdvance.getText ().toString (),
                             etDieselAdvance.getText ().toString (),
-                            etBillRate.getText ().toString ());
+                            etTotalAdvance.getText ().toString (),
+                            etTotalCompanyBilling.getText ().toString (),
+                            etTotalBhada.getText ().toString ()
+                    );
                 }
             }
         });
@@ -626,8 +643,8 @@ public class TruckEntryActivity extends AppCompatActivity {
 //            truckList.clear ();
 //            truckAdapter.notifyDataSetChanged ();
 //            progressBarTrucks.setVisibility (View.VISIBLE);
-            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_GET_TRUCK_DETAILS, true);
-            StringRequest strRequest1 = new StringRequest (Request.Method.GET, AppConfigURL.URL_GET_TRUCK_DETAILS,
+            Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_GET_TRUCKS, true);
+            StringRequest strRequest1 = new StringRequest (Request.Method.GET, AppConfigURL.URL_GET_TRUCKS,
                     new com.android.volley.Response.Listener<String> () {
                         @Override
                         public void onResponse (String response) {
@@ -797,7 +814,11 @@ public class TruckEntryActivity extends AppCompatActivity {
         }
     }
     
-    private void UpdateTruckEntryToServer (final String lr_number, final String weight, final String date, final String truck_number, final String destination, final String order_number, final String invoice_number, final String cash_advance, final String diesel_advance, final String bill_date) {
+    private void UpdateTruckEntryToServer (final String party_id, final String lr_number, final String weight, final String date,
+                                           final String truck_id, final String destination_id, final String company_rate,
+                                           final String bill_rate, final String delivery_number, final String invoice_number,
+                                           final String cash_advance, final String diesel_advance, final String total_advance,
+                                           final String total_company_billing, final String total_bhada) {
         if (NetworkConnection.isNetworkAvailable (TruckEntryActivity.this)) {
             Utils.showProgressDialog (progressDialog, getResources ().getString (R.string.progress_dialog_text_please_wait), true);
             Utils.showLog (Log.INFO, "" + AppConfigTags.URL, AppConfigURL.URL_TRUCK_ENTRY, true);
@@ -854,18 +875,23 @@ public class TruckEntryActivity extends AppCompatActivity {
                 @Override
                 protected Map<String, String> getParams () throws AuthFailureError {
                     Map<String, String> params = new Hashtable<String, String> ();
+                    params.put (AppConfigTags.COMPANY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.COMPANY_ID));
+                    params.put (AppConfigTags.PARTY_ID, party_id);
                     params.put (AppConfigTags.LR_NUMBER, lr_number);
                     params.put (AppConfigTags.WEIGHT, weight);
                     params.put (AppConfigTags.DATE, date);
-                    params.put (AppConfigTags.TRUCK_NUMBER, truck_number);
-                    params.put (AppConfigTags.DESTINATION, destination);
-                    params.put (AppConfigTags.ORDER_NUMBER, order_number);
+                    params.put (AppConfigTags.TRUCK_ID, truck_id);
+                    params.put (AppConfigTags.DESTINATION_ID, destination_id);
+                    params.put (AppConfigTags.COMPANY_RATE, company_rate);
+                    params.put (AppConfigTags.BILL_RATE, bill_rate);
+                    params.put (AppConfigTags.DELIVERY_NUMBER, delivery_number);
                     params.put (AppConfigTags.INVOICE_NUMBER, invoice_number);
-                    params.put (AppConfigTags.COMPANY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.COMPANY_ID));
-                    params.put (AppConfigTags.PARTY_ID, userDetailsPref.getStringPref (TruckEntryActivity.this, UserDetailsPref.PARTY_ID));
                     params.put (AppConfigTags.CASH_ADVANCE, cash_advance);
                     params.put (AppConfigTags.DIESEL_ADVANCE, diesel_advance);
-                    params.put (AppConfigTags.BILL_RATE, bill_date);
+                    params.put (AppConfigTags.TOTAL_ADVANCE, total_advance);
+                    params.put (AppConfigTags.TOTAL_COMPANY_BILLING, total_company_billing);
+                    params.put (AppConfigTags.TOTAL_BHADA, total_bhada);
+                    
                     Utils.showLog (Log.INFO, AppConfigTags.PARAMETERS_SENT_TO_THE_SERVER, "" + params, true);
                     return params;
                 }

@@ -39,14 +39,16 @@ public class AppConfigTags {
     public static String LR_NUMBER = "lr_number";
     public static String WEIGHT = "weight";
     public static String DATE = "date";
-    public static String TRUCK_NUMBER = "truck_number";
-    public static String DESTINATION = "destination";
-    public static String ORDER_NUMBER = "order_number";
+    public static String DELIVERY_NUMBER = "delivery_number";
     public static String INVOICE_NUMBER = "invoice_number";
     public static String COMPANY_ID = "company_id";
     public static String COMPANY_NAME = "company_name";
+    public static String COMPANY_RATE = "company_rate";
     public static String CASH_ADVANCE = "cash_advance";
     public static String DIESEL_ADVANCE = "diesel_advance";
+    public static String TOTAL_ADVANCE = "total_advance";
+    public static String TOTAL_COMPANY_BILLING = "total_company_billing";
+    public static String TOTAL_BHADA = "total_bhada";
     public static String BILL_RATE = "bill_rate";
     public static String PASSWORD = "password";
     public static String EMAIL = "email";
@@ -64,6 +66,7 @@ public class AppConfigTags {
     public static String SUBSCRIPTION_EXPIRES_IN = "subscription_expires_in";
     public static String SUBSCRIPTION_EXPIRES_AT = "subscription_expires_at";
     public static String TRUCK_ID = "truck_id";
+    public static String TRUCK_NUMBER = "truck_number";
     public static String TRUCK_OWNER_NAME = "truck_owner_name";
     public static String TRUCK_OWNER_MOBILE = "truck_owner_mobile";
     public static String TRUCK_OWNER_PAN_CARD = "truck_owner_pan_card";
