@@ -389,6 +389,11 @@ public class TruckEntryActivity extends AppCompatActivity {
                     flag = false;
                 }
     
+                if (Double.parseDouble (etTotalAdvance.getText ().toString ()) > Double.parseDouble (etTotalBhada.getText ().toString ())) {
+                    flag = false;
+                    Utils.showSnackBar (TruckEntryActivity.this, clMain, "Total Advance should be less than Total Bhada", Snackbar.LENGTH_LONG, null, null);
+                }
+    
                 if (flag) {
                     UpdateTruckEntryToServer (
                             String.valueOf (party_id),
